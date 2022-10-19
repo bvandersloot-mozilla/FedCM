@@ -6,7 +6,7 @@
   <link href="https://www.w3.org/StyleSheets/TR/2021/cg-draft" rel="stylesheet">
   <meta content="Bikeshed version b0de3432c, updated Thu Oct 13 09:16:59 2022 -0700" name="generator">
   <link href="https://fedidcg.github.io/FedCM/" rel="canonical">
-  <meta content="5e8a76e891a9c6562cc8460b7e372e398499427b" name="document-revision">
+  <meta content="153940ad7f55abb6ffa64d903f65821e43fd176f" name="document-revision">
 <style>
 dl.domintro dt {
     font-family: Menlo, Consolas, "DejaVu Sans Mono", Monaco, monospace;
@@ -1161,7 +1161,7 @@ by exposing a series of HTTP endpoints:</p>
     <li data-md>
      <p>An <a href="#idp-api-id-assertion-endpoint">§ 5.4 Identity Assertions</a> endpoint</p>
    </ol>
-   <p>The <a data-link-type="dfn" href="#idp" id="ref-for-idp①④">IDP</a> must also host a file at the ".well-known/webidentity" path of its <a data-link-type="dfn">registerable domain</a> that has JSON contents that are convertable to a <code class="idl"><a data-link-type="idl" href="#dictdef-discovery" id="ref-for-dictdef-discovery">Discovery</a></code> object.</p>
+   <p>The <a data-link-type="dfn" href="#idp" id="ref-for-idp①④">IDP</a> must also host a file at the ".well-known/web-identity" path of its <a data-link-type="dfn">registerable domain</a> that has JSON contents that are convertable to a <code class="idl"><a data-link-type="idl" href="#dictdef-discovery" id="ref-for-dictdef-discovery">Discovery</a></code> object.</p>
 <pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-discovery"><code><c- g>Discovery</c-></code></dfn> {
   <c- b>required</c-> <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#idl-sequence" id="ref-for-idl-sequence"><c- b>sequence</c-></a>&lt;<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString"><c- b>USVString</c-></a>> <dfn class="dfn-paneled idl-code" data-dfn-for="Discovery" data-dfn-type="dict-member" data-export data-type="sequence<USVString> " id="dom-discovery-provider_urls"><code><c- g>provider_urls</c-></code></dfn>;
 };
@@ -1184,7 +1184,7 @@ which serves as a discovery device to other endpoints provided by the <a data-li
 <c- e>Sec-Fetch-Dest</c-><c- o>:</c-> <c- l>webidentity</c->
 </pre>
    </div>
-   <p>The response is parsed as a <code class="idl"><a data-link-type="idl" href="#dictdef-manifest" id="ref-for-dictdef-manifest">Manifest</a></code> object.</p>
+   <p>The response body must be a JSON object that can be <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value" id="ref-for-dfn-convert-ecmascript-to-idl-value">converted</a> to a <code class="idl"><a data-link-type="idl" href="#dictdef-manifest" id="ref-for-dictdef-manifest">Manifest</a></code> without an exception.</p>
 <pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-identityicon"><code><c- g>IdentityIcon</c-></code></dfn> {
   <c- b>required</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString①"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="USVString " href="#dom-identityicon-url" id="ref-for-dom-identityicon-url"><c- g>url</c-></a>;
   <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-long" id="ref-for-idl-unsigned-long"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-identityicon-size" id="ref-for-dom-identityicon-size"><c- g>size</c-></a>;
@@ -1291,7 +1291,7 @@ that.</p>
 <c- e>Sec-Fetch-Dest</c-><c- o>:</c-> <c- l>webidentity</c->
 </pre>
    </div>
-   <p>The response is parsed as an <code class="idl"><a data-link-type="idl" href="#dictdef-identityaccountlist" id="ref-for-dictdef-identityaccountlist">IdentityAccountList</a></code> object.</p>
+   <p>The response body must be a JSON object that can be <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value" id="ref-for-dfn-convert-ecmascript-to-idl-value①">converted</a> to a <code class="idl"><a data-link-type="idl" href="#dictdef-identityaccountlist" id="ref-for-dictdef-identityaccountlist">IdentityAccountList</a></code> without an exception.</p>
 <pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-identityaccount"><code><c- g>IdentityAccount</c-></code></dfn> {
   <c- b>required</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString①③"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="USVString " href="#dom-identityaccount-id" id="ref-for-dom-identityaccount-id"><c- g>id</c-></a>;
   <c- b>required</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString①④"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="USVString " href="#dom-identityaccount-name" id="ref-for-dom-identityaccount-name"><c- g>name</c-></a>;
@@ -1365,7 +1365,7 @@ the <a data-link-type="dfn" href="#privacy-policy" id="ref-for-privacy-policy">P
 <c- e>Sec-Fetch-Dest</c-><c- o>:</c-> <c- l>webidentity</c->
 </pre>
    </div>
-   <p>The response is parsed as an <code class="idl"><a data-link-type="idl" href="#dictdef-identityclientmetadata" id="ref-for-dictdef-identityclientmetadata">IdentityClientMetadata</a></code> object.</p>
+   <p>The response body must be a JSON object that can be <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value" id="ref-for-dfn-convert-ecmascript-to-idl-value②">converted</a> to a <code class="idl"><a data-link-type="idl" href="#dictdef-identityclientmetadata" id="ref-for-dictdef-identityclientmetadata">IdentityClientMetadata</a></code> without an exception.</p>
 <pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-identityclientmetadata"><code><c- g>IdentityClientMetadata</c-></code></dfn> {
   <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString②③"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="USVString " href="#dom-identityclientmetadata-privacy_policy_url" id="ref-for-dom-identityclientmetadata-privacy_policy_url①"><c- g>privacy_policy_url</c-></a>;
   <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString②④"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="USVString " href="#dom-identityclientmetadata-terms_of_service_url" id="ref-for-dom-identityclientmetadata-terms_of_service_url①"><c- g>terms_of_service_url</c-></a>;
@@ -1430,7 +1430,7 @@ account_id=123&amp;client_id=client1234&amp;nonce=Ct60bD&amp;disclosure_text_sho
    <div class="idp-normative-text"> An <a data-link-type="dfn" href="#idp" id="ref-for-idp②④">IDP</a> MUST check the referrer to ensure that a malicious <a data-link-type="dfn" href="#rp" id="ref-for-rp②④">RP</a> does not receive an ID token
 corresponding to another <a data-link-type="dfn" href="#rp" id="ref-for-rp②⑤">RP</a>. In other words, the <a data-link-type="dfn" href="#idp" id="ref-for-idp②⑤">IDP</a> MUST check that the referrer is
 represented by the <a data-link-type="dfn" href="#client-id" id="ref-for-client-id⑤">client id</a>. As the <a data-link-type="dfn" href="#client-id" id="ref-for-client-id⑥">client ids</a> are <a data-link-type="dfn" href="#idp" id="ref-for-idp②⑥">IDP</a>-specific, the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#user-agent" id="ref-for-user-agent⑦">user agent</a> cannot perform this check. </div>
-   <p>The response is parsed as an <code class="idl"><a data-link-type="idl" href="#dictdef-identitytoken" id="ref-for-dictdef-identitytoken">IdentityToken</a></code> object.</p>
+   <p>The response body must be a JSON object that can be <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value" id="ref-for-dfn-convert-ecmascript-to-idl-value③">converted</a> to a <code class="idl"><a data-link-type="idl" href="#dictdef-identitytoken" id="ref-for-dictdef-identitytoken">IdentityToken</a></code> without an exception.</p>
 <pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-identitytoken"><code><c- g>IdentityToken</c-></code></dfn> {
   <c- b>required</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString②⑦"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="USVString " href="#dom-identitytoken-token" id="ref-for-dom-identitytoken-token"><c- g>token</c-></a>;
 };
@@ -1724,7 +1724,7 @@ steps given a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#conce
        <li data-md>
         <p>Let <var>json</var> be the result of <a data-link-type="dfn" href="#extract-the-json-fetch-response" id="ref-for-extract-the-json-fetch-response">extract the JSON fetch response</a> from <var>response</var>.</p>
        <li data-md>
-        <p><a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value" id="ref-for-dfn-convert-ecmascript-to-idl-value">Convert</a> <var>json</var> to an <code class="idl"><a data-link-type="idl" href="#dictdef-identityaccountlist" id="ref-for-dictdef-identityaccountlist②">IdentityAccountList</a></code>, <var>potentialAccountsList</var>.</p>
+        <p><a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value" id="ref-for-dfn-convert-ecmascript-to-idl-value④">Convert</a> <var>json</var> to an <code class="idl"><a data-link-type="idl" href="#dictdef-identityaccountlist" id="ref-for-dictdef-identityaccountlist②">IdentityAccountList</a></code>, <var>potentialAccountsList</var>.</p>
        <li data-md>
         <p>Set <var>accountsList</var> to <var>potentialAccountsList</var>. // This operation is not defined but will be removed by #261</p>
       </ol>
@@ -1831,7 +1831,7 @@ steps given a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#conce
        <li data-md>
         <p>Let <var>json</var> be the result of <a data-link-type="dfn" href="#extract-the-json-fetch-response" id="ref-for-extract-the-json-fetch-response①">extract the JSON fetch response</a> from <var>response</var>.</p>
        <li data-md>
-        <p><a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value" id="ref-for-dfn-convert-ecmascript-to-idl-value①">Convert</a> <var>json</var> to an <code class="idl"><a data-link-type="idl" href="#dictdef-identityclientmetadata" id="ref-for-dictdef-identityclientmetadata③">IdentityClientMetadata</a></code>, <var>metadata</var>.</p>
+        <p><a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value" id="ref-for-dfn-convert-ecmascript-to-idl-value⑤">Convert</a> <var>json</var> to an <code class="idl"><a data-link-type="idl" href="#dictdef-identityclientmetadata" id="ref-for-dictdef-identityclientmetadata③">IdentityClientMetadata</a></code>, <var>metadata</var>.</p>
        <li data-md>
         <p>Copy <var>metadata</var> into <var>clientMetadata</var>. // This operation is not defined but will be removed by #261</p>
       </ol>
@@ -1913,7 +1913,7 @@ steps given a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#conce
        <li data-md>
         <p>Let <var>json</var> be the result of <a data-link-type="dfn" href="#extract-the-json-fetch-response" id="ref-for-extract-the-json-fetch-response②">extract the JSON fetch response</a> from <var>response</var>.</p>
        <li data-md>
-        <p><a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value" id="ref-for-dfn-convert-ecmascript-to-idl-value②">Convert</a> <var>json</var> to an <code class="idl"><a data-link-type="idl" href="#dictdef-identitytoken" id="ref-for-dictdef-identitytoken③">IdentityToken</a></code>, <var>fetchedToken</var>.</p>
+        <p><a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value" id="ref-for-dfn-convert-ecmascript-to-idl-value⑥">Convert</a> <var>json</var> to an <code class="idl"><a data-link-type="idl" href="#dictdef-identitytoken" id="ref-for-dictdef-identitytoken③">IdentityToken</a></code>, <var>fetchedToken</var>.</p>
        <li data-md>
         <p>Set <var>token</var> to <var>fetchedToken</var>. // This operation is not defined but will be removed by #261</p>
       </ol>
@@ -1989,7 +1989,7 @@ steps given a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#conce
        <li data-md>
         <p>Let <var>json</var> be the result of <a data-link-type="dfn" href="#extract-the-json-fetch-response" id="ref-for-extract-the-json-fetch-response③">extract the JSON fetch response</a> from <var>response</var>.</p>
        <li data-md>
-        <p><a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value" id="ref-for-dfn-convert-ecmascript-to-idl-value③">Convert</a> <var>json</var> to a <code class="idl"><a data-link-type="idl" href="#dictdef-discovery" id="ref-for-dictdef-discovery①">Discovery</a></code>, <var>discovery</var>.</p>
+        <p><a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value" id="ref-for-dfn-convert-ecmascript-to-idl-value⑦">Convert</a> <var>json</var> to a <code class="idl"><a data-link-type="idl" href="#dictdef-discovery" id="ref-for-dictdef-discovery①">Discovery</a></code>, <var>discovery</var>.</p>
        <li data-md>
         <p>If the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-size" id="ref-for-list-size②">size</a> of <var>discovery</var>["<code class="idl"><a data-link-type="idl" href="#dom-discovery-provider_urls" id="ref-for-dom-discovery-provider_urls">provider_urls</a></code>""] is greater than 1, return.</p>
         <p class="issue" id="issue-80d5b61c"><a class="self-link" href="#issue-80d5b61c"></a> <a href="https://github.com/fedidcg/FedCM/issues/333">relax</a> the size of the provider_urls array.</p>
@@ -2046,7 +2046,7 @@ steps given a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#conce
        <li data-md>
         <p>Let <var>json</var> be the result of <a data-link-type="dfn" href="#extract-the-json-fetch-response" id="ref-for-extract-the-json-fetch-response④">extract the JSON fetch response</a> from <var>response</var>.</p>
        <li data-md>
-        <p><a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value" id="ref-for-dfn-convert-ecmascript-to-idl-value④">Convert</a> <var>json</var> to a <code class="idl"><a data-link-type="idl" href="#dictdef-manifest" id="ref-for-dictdef-manifest⑨">Manifest</a></code>, <var>fetchedManifest</var>.</p>
+        <p><a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value" id="ref-for-dfn-convert-ecmascript-to-idl-value⑧">Convert</a> <var>json</var> to a <code class="idl"><a data-link-type="idl" href="#dictdef-manifest" id="ref-for-dictdef-manifest⑨">Manifest</a></code>, <var>fetchedManifest</var>.</p>
        <li data-md>
         <p>Copy <var>fetchedManifest</var> into <var>manifest</var>. // This operation is not defined but will be removed by #261</p>
       </ol>
@@ -4212,7 +4212,11 @@ preventing token reuse(see Mozilla’s <a href="https://wiki.mozilla.org/Identit
   <aside class="dfn-panel" data-for="term-for-dfn-convert-ecmascript-to-idl-value">
    <a href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value">https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dfn-convert-ecmascript-to-idl-value">7.4. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method</a> <a href="#ref-for-dfn-convert-ecmascript-to-idl-value①">(2)</a> <a href="#ref-for-dfn-convert-ecmascript-to-idl-value②">(3)</a> <a href="#ref-for-dfn-convert-ecmascript-to-idl-value③">(4)</a> <a href="#ref-for-dfn-convert-ecmascript-to-idl-value④">(5)</a>
+    <li><a href="#ref-for-dfn-convert-ecmascript-to-idl-value">5.1. Manifest</a>
+    <li><a href="#ref-for-dfn-convert-ecmascript-to-idl-value①">5.2. Accounts List</a>
+    <li><a href="#ref-for-dfn-convert-ecmascript-to-idl-value②">5.3. Client Metadata</a>
+    <li><a href="#ref-for-dfn-convert-ecmascript-to-idl-value③">5.4. Identity Assertions</a>
+    <li><a href="#ref-for-dfn-convert-ecmascript-to-idl-value④">7.4. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method</a> <a href="#ref-for-dfn-convert-ecmascript-to-idl-value⑤">(2)</a> <a href="#ref-for-dfn-convert-ecmascript-to-idl-value⑥">(3)</a> <a href="#ref-for-dfn-convert-ecmascript-to-idl-value⑦">(4)</a> <a href="#ref-for-dfn-convert-ecmascript-to-idl-value⑧">(5)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-resolve">
