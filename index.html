@@ -6,7 +6,7 @@
   <link href="https://www.w3.org/StyleSheets/TR/2021/cg-draft" rel="stylesheet">
   <meta content="Bikeshed version b0de3432c, updated Thu Oct 13 09:16:59 2022 -0700" name="generator">
   <link href="https://fedidcg.github.io/FedCM/" rel="canonical">
-  <meta content="21ce80e9da73d3275de01d674c8d2dcdae15adb5" name="document-revision">
+  <meta content="5e8a76e891a9c6562cc8460b7e372e398499427b" name="document-revision">
 <style>
 dl.domintro dt {
     font-family: Menlo, Consolas, "DejaVu Sans Mono", Monaco, monospace;
@@ -608,7 +608,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Federated Credential Management API</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#CG-DRAFT">Draft Community Group Report</a>, <time class="dt-updated" datetime="2022-10-18">18 October 2022</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#CG-DRAFT">Draft Community Group Report</a>, <time class="dt-updated" datetime="2022-10-19">19 October 2022</time></p>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1161,7 +1161,7 @@ by exposing a series of HTTP endpoints:</p>
     <li data-md>
      <p>An <a href="#idp-api-id-assertion-endpoint">§ 5.4 Identity Assertions</a> endpoint</p>
    </ol>
-   <p>The <a data-link-type="dfn" href="#idp" id="ref-for-idp①④">IDP</a> must also host a file at the .well-known/webidentity path of its <a data-link-type="dfn">registerable domain</a> that has JSON contents that are convertable to a <code class="idl"><a data-link-type="idl" href="#dictdef-discovery" id="ref-for-dictdef-discovery">Discovery</a></code> object.</p>
+   <p>The <a data-link-type="dfn" href="#idp" id="ref-for-idp①④">IDP</a> must also host a file at the ".well-known/webidentity" path of its <a data-link-type="dfn">registerable domain</a> that has JSON contents that are convertable to a <code class="idl"><a data-link-type="idl" href="#dictdef-discovery" id="ref-for-dictdef-discovery">Discovery</a></code> object.</p>
 <pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-discovery"><code><c- g>Discovery</c-></code></dfn> {
   <c- b>required</c-> <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#idl-sequence" id="ref-for-idl-sequence"><c- b>sequence</c-></a>&lt;<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString"><c- b>USVString</c-></a>> <dfn class="dfn-paneled idl-code" data-dfn-for="Discovery" data-dfn-type="dict-member" data-export data-type="sequence<USVString> " id="dom-discovery-provider_urls"><code><c- g>provider_urls</c-></code></dfn>;
 };
@@ -1291,7 +1291,7 @@ that.</p>
 <c- e>Sec-Fetch-Dest</c-><c- o>:</c-> <c- l>webidentity</c->
 </pre>
    </div>
-   <p>The response is parsed as a <code class="idl"><a data-link-type="idl" href="#dictdef-identityaccountlist" id="ref-for-dictdef-identityaccountlist">IdentityAccountList</a></code> object.</p>
+   <p>The response is parsed as an <code class="idl"><a data-link-type="idl" href="#dictdef-identityaccountlist" id="ref-for-dictdef-identityaccountlist">IdentityAccountList</a></code> object.</p>
 <pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-identityaccount"><code><c- g>IdentityAccount</c-></code></dfn> {
   <c- b>required</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString①③"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="USVString " href="#dom-identityaccount-id" id="ref-for-dom-identityaccount-id"><c- g>id</c-></a>;
   <c- b>required</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString①④"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="USVString " href="#dom-identityaccount-name" id="ref-for-dom-identityaccount-name"><c- g>name</c-></a>;
@@ -1365,7 +1365,7 @@ the <a data-link-type="dfn" href="#privacy-policy" id="ref-for-privacy-policy">P
 <c- e>Sec-Fetch-Dest</c-><c- o>:</c-> <c- l>webidentity</c->
 </pre>
    </div>
-   <p>The response is parsed as a <code class="idl"><a data-link-type="idl" href="#dictdef-identityclientmetadata" id="ref-for-dictdef-identityclientmetadata">IdentityClientMetadata</a></code> object.</p>
+   <p>The response is parsed as an <code class="idl"><a data-link-type="idl" href="#dictdef-identityclientmetadata" id="ref-for-dictdef-identityclientmetadata">IdentityClientMetadata</a></code> object.</p>
 <pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-identityclientmetadata"><code><c- g>IdentityClientMetadata</c-></code></dfn> {
   <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString②③"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="USVString " href="#dom-identityclientmetadata-privacy_policy_url" id="ref-for-dom-identityclientmetadata-privacy_policy_url①"><c- g>privacy_policy_url</c-></a>;
   <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString②④"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="USVString " href="#dom-identityclientmetadata-terms_of_service_url" id="ref-for-dom-identityclientmetadata-terms_of_service_url①"><c- g>terms_of_service_url</c-></a>;
@@ -1430,7 +1430,7 @@ account_id=123&amp;client_id=client1234&amp;nonce=Ct60bD&amp;disclosure_text_sho
    <div class="idp-normative-text"> An <a data-link-type="dfn" href="#idp" id="ref-for-idp②④">IDP</a> MUST check the referrer to ensure that a malicious <a data-link-type="dfn" href="#rp" id="ref-for-rp②④">RP</a> does not receive an ID token
 corresponding to another <a data-link-type="dfn" href="#rp" id="ref-for-rp②⑤">RP</a>. In other words, the <a data-link-type="dfn" href="#idp" id="ref-for-idp②⑤">IDP</a> MUST check that the referrer is
 represented by the <a data-link-type="dfn" href="#client-id" id="ref-for-client-id⑤">client id</a>. As the <a data-link-type="dfn" href="#client-id" id="ref-for-client-id⑥">client ids</a> are <a data-link-type="dfn" href="#idp" id="ref-for-idp②⑥">IDP</a>-specific, the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#user-agent" id="ref-for-user-agent⑦">user agent</a> cannot perform this check. </div>
-   <p>The response is parsed as a <code class="idl"><a data-link-type="idl" href="#dictdef-identitytoken" id="ref-for-dictdef-identitytoken">IdentityToken</a></code> object.</p>
+   <p>The response is parsed as an <code class="idl"><a data-link-type="idl" href="#dictdef-identitytoken" id="ref-for-dictdef-identitytoken">IdentityToken</a></code> object.</p>
 <pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-identitytoken"><code><c- g>IdentityToken</c-></code></dfn> {
   <c- b>required</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString②⑦"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="USVString " href="#dom-identitytoken-token" id="ref-for-dom-identitytoken-token"><c- g>token</c-></a>;
 };
