@@ -6,7 +6,7 @@
   <link href="https://www.w3.org/StyleSheets/TR/2021/cg-draft" rel="stylesheet">
   <meta content="Bikeshed version b0de3432c, updated Thu Oct 13 09:16:59 2022 -0700" name="generator">
   <link href="https://fedidcg.github.io/FedCM/" rel="canonical">
-  <meta content="f5179c32c1644915696fcb37d1ea3760bcad4e64" name="document-revision">
+  <meta content="84085d27a8e60e8e83a31ef11f9e46a7145e5e03" name="document-revision">
 <style>
 dl.domintro dt {
     font-family: Menlo, Consolas, "DejaVu Sans Mono", Monaco, monospace;
@@ -1161,7 +1161,7 @@ by exposing a series of HTTP endpoints:</p>
     <li data-md>
      <p>An <a href="#idp-api-id-assertion-endpoint">§ 5.4 Identity Assertions</a> endpoint</p>
    </ol>
-   <p>The <a data-link-type="dfn" href="#idp" id="ref-for-idp①④">IDP</a> must also host a file at the ".well-known/web-identity" path of its <a data-link-type="dfn">registerable domain</a> that has JSON contents that are convertable to a <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderwellknown" id="ref-for-dictdef-identityproviderwellknown">IdentityProviderWellKnown</a></code> object.</p>
+   <p>The <a data-link-type="dfn" href="#idp" id="ref-for-idp①④">IDP</a> must also host a file at the ".well-known/web-identity" path of its <a data-link-type="dfn">registerable domain</a> that has JSON contents that are convertable to an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderwellknown" id="ref-for-dictdef-identityproviderwellknown">IdentityProviderWellKnown</a></code> object.</p>
 <pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-identityproviderwellknown"><code><c- g>IdentityProviderWellKnown</c-></code></dfn> {
   <c- b>required</c-> <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#idl-sequence" id="ref-for-idl-sequence"><c- b>sequence</c-></a>&lt;<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString"><c- b>USVString</c-></a>> <dfn class="dfn-paneled idl-code" data-dfn-for="IdentityProviderWellKnown" data-dfn-type="dict-member" data-export data-type="sequence<USVString> " id="dom-identityproviderwellknown-provider_urls"><code><c- g>provider_urls</c-></code></dfn>;
 };
@@ -1184,7 +1184,7 @@ which serves as a discovery device to other endpoints provided by the <a data-li
 <c- e>Sec-Fetch-Dest</c-><c- o>:</c-> <c- l>webidentity</c->
 </pre>
    </div>
-   <p>The response body must be a JSON object that can be <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value" id="ref-for-dfn-convert-ecmascript-to-idl-value">converted</a> to a <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderapiconfig" id="ref-for-dictdef-identityproviderapiconfig">IdentityProviderAPIConfig</a></code> without an exception.</p>
+   <p>The response body must be a JSON object that can be <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value" id="ref-for-dfn-convert-ecmascript-to-idl-value">converted</a> to an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderapiconfig" id="ref-for-dictdef-identityproviderapiconfig">IdentityProviderAPIConfig</a></code> without an exception.</p>
 <pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-identityprovidericon"><code><c- g>IdentityProviderIcon</c-></code></dfn> {
   <c- b>required</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString①"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="USVString " href="#dom-identityprovidericon-url" id="ref-for-dom-identityprovidericon-url"><c- g>url</c-></a>;
   <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-long" id="ref-for-idl-unsigned-long"><c- b>unsigned</c-> <c- b>long</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="unsigned long " href="#dom-identityprovidericon-size" id="ref-for-dom-identityprovidericon-size"><c- g>size</c-></a>;
@@ -1291,7 +1291,7 @@ that.</p>
 <c- e>Sec-Fetch-Dest</c-><c- o>:</c-> <c- l>webidentity</c->
 </pre>
    </div>
-   <p>The response body must be a JSON object that can be <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value" id="ref-for-dfn-convert-ecmascript-to-idl-value①">converted</a> to a <code class="idl"><a data-link-type="idl" href="#dictdef-identityprovideraccountlist" id="ref-for-dictdef-identityprovideraccountlist">IdentityProviderAccountList</a></code> without an exception.</p>
+   <p>The response body must be a JSON object that can be <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value" id="ref-for-dfn-convert-ecmascript-to-idl-value①">converted</a> to an <code class="idl"><a data-link-type="idl" href="#dictdef-identityprovideraccountlist" id="ref-for-dictdef-identityprovideraccountlist">IdentityProviderAccountList</a></code> without an exception.</p>
 <pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-identityprovideraccount"><code><c- g>IdentityProviderAccount</c-></code></dfn> {
   <c- b>required</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString①③"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="USVString " href="#dom-identityprovideraccount-id" id="ref-for-dom-identityprovideraccount-id"><c- g>id</c-></a>;
   <c- b>required</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString①④"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="USVString " href="#dom-identityprovideraccount-name" id="ref-for-dom-identityprovideraccount-name"><c- g>name</c-></a>;
@@ -1365,7 +1365,7 @@ the <a data-link-type="dfn" href="#privacy-policy" id="ref-for-privacy-policy">P
 <c- e>Sec-Fetch-Dest</c-><c- o>:</c-> <c- l>webidentity</c->
 </pre>
    </div>
-   <p>The response body must be a JSON object that can be <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value" id="ref-for-dfn-convert-ecmascript-to-idl-value②">converted</a> to a <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderclientmetadata" id="ref-for-dictdef-identityproviderclientmetadata">IdentityProviderClientMetadata</a></code> without an exception.</p>
+   <p>The response body must be a JSON object that can be <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value" id="ref-for-dfn-convert-ecmascript-to-idl-value②">converted</a> to an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderclientmetadata" id="ref-for-dictdef-identityproviderclientmetadata">IdentityProviderClientMetadata</a></code> without an exception.</p>
 <pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-identityproviderclientmetadata"><code><c- g>IdentityProviderClientMetadata</c-></code></dfn> {
   <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString②③"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="USVString " href="#dom-identityproviderclientmetadata-privacy_policy_url" id="ref-for-dom-identityproviderclientmetadata-privacy_policy_url①"><c- g>privacy_policy_url</c-></a>;
   <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString②④"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="USVString " href="#dom-identityproviderclientmetadata-terms_of_service_url" id="ref-for-dom-identityproviderclientmetadata-terms_of_service_url①"><c- g>terms_of_service_url</c-></a>;
@@ -1430,7 +1430,7 @@ account_id=123&amp;client_id=client1234&amp;nonce=Ct60bD&amp;disclosure_text_sho
    <div class="idp-normative-text"> An <a data-link-type="dfn" href="#idp" id="ref-for-idp②④">IDP</a> MUST check the referrer to ensure that a malicious <a data-link-type="dfn" href="#rp" id="ref-for-rp②④">RP</a> does not receive an ID token
 corresponding to another <a data-link-type="dfn" href="#rp" id="ref-for-rp②⑤">RP</a>. In other words, the <a data-link-type="dfn" href="#idp" id="ref-for-idp②⑤">IDP</a> MUST check that the referrer is
 represented by the <a data-link-type="dfn" href="#client-id" id="ref-for-client-id⑤">client id</a>. As the <a data-link-type="dfn" href="#client-id" id="ref-for-client-id⑥">client ids</a> are <a data-link-type="dfn" href="#idp" id="ref-for-idp②⑥">IDP</a>-specific, the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#user-agent" id="ref-for-user-agent⑦">user agent</a> cannot perform this check. </div>
-   <p>The response body must be a JSON object that can be <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value" id="ref-for-dfn-convert-ecmascript-to-idl-value③">converted</a> to a <code class="idl"><a data-link-type="idl" href="#dictdef-identityprovidertoken" id="ref-for-dictdef-identityprovidertoken">IdentityProviderToken</a></code> without an exception.</p>
+   <p>The response body must be a JSON object that can be <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value" id="ref-for-dfn-convert-ecmascript-to-idl-value③">converted</a> to an <code class="idl"><a data-link-type="idl" href="#dictdef-identityprovidertoken" id="ref-for-dictdef-identityprovidertoken">IdentityProviderToken</a></code> without an exception.</p>
 <pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-identityprovidertoken"><code><c- g>IdentityProviderToken</c-></code></dfn> {
   <c- b>required</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString②⑦"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="USVString " href="#dom-identityprovidertoken-token" id="ref-for-dom-identityprovidertoken-token"><c- g>token</c-></a>;
 };
@@ -1684,7 +1684,7 @@ new <a data-link-type="dfn" href="#accountstate" id="ref-for-accountstate">Accou
     </ol>
    </div>
    <div class="algorithm" data-algorithm="fetch the accounts list">
-     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="fetch-the-accounts-list">fetch the accounts list</dfn> given a <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderapiconfig" id="ref-for-dictdef-identityproviderapiconfig②">IdentityProviderAPIConfig</a></code> <var>manifest</var> and an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderconfig" id="ref-for-dictdef-identityproviderconfig⑤">IdentityProviderConfig</a></code> <var>provider</var>: 
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="fetch-the-accounts-list">fetch the accounts list</dfn> given an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderapiconfig" id="ref-for-dictdef-identityproviderapiconfig②">IdentityProviderAPIConfig</a></code> <var>manifest</var> and an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderconfig" id="ref-for-dictdef-identityproviderconfig⑤">IdentityProviderConfig</a></code> <var>provider</var>: 
     <ol>
      <li data-md>
       <p>Let <var>accountsUrl</var> be the result of <a data-link-type="dfn" href="#computing-the-manifest-url" id="ref-for-computing-the-manifest-url">computing the manifest URL</a> given <var>provider</var> and <var>manifest</var>["<code class="idl"><a data-link-type="idl" href="#dom-identityproviderapiconfig-accounts_endpoint" id="ref-for-dom-identityproviderapiconfig-accounts_endpoint①">accounts_endpoint</a></code>"].</p>
@@ -1774,12 +1774,12 @@ return null.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="request permission to sign-up">
-     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="request-permission-to-sign-up">request permission to sign-up</dfn> the user with a given <code class="idl"><a data-link-type="idl" href="#dictdef-identityprovideraccount" id="ref-for-dictdef-identityprovideraccount③">IdentityProviderAccount</a></code> <var>account</var>, an <a data-link-type="dfn" href="#accountstate" id="ref-for-accountstate①">AccountState</a> <var>accountState</var>, a <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderapiconfig" id="ref-for-dictdef-identityproviderapiconfig③">IdentityProviderAPIConfig</a></code> <var>manifest</var>, and an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderconfig" id="ref-for-dictdef-identityproviderconfig⑦">IdentityProviderConfig</a></code> <var>provider</var>: 
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="request-permission-to-sign-up">request permission to sign-up</dfn> the user with a given <code class="idl"><a data-link-type="idl" href="#dictdef-identityprovideraccount" id="ref-for-dictdef-identityprovideraccount③">IdentityProviderAccount</a></code> <var>account</var>, an <a data-link-type="dfn" href="#accountstate" id="ref-for-accountstate①">AccountState</a> <var>accountState</var>, an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderapiconfig" id="ref-for-dictdef-identityproviderapiconfig③">IdentityProviderAPIConfig</a></code> <var>manifest</var>, and an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderconfig" id="ref-for-dictdef-identityproviderconfig⑦">IdentityProviderConfig</a></code> <var>provider</var>: 
     <ol>
      <li data-md>
       <p>Let <var>metadata</var> be the result of running the <a data-link-type="dfn" href="#fetch-the-client-metadata" id="ref-for-fetch-the-client-metadata">fetch the client metadata</a> algorithm with <var>manifest</var> and <var>provider</var>.</p>
      <li data-md>
-      <p>If privacy_policy_url is defined in <var>metadata</var> and the <var>provider</var>’s <code class="idl"><a data-link-type="idl" href="#dom-identityproviderconfig-clientid" id="ref-for-dom-identityproviderconfig-clientid①">clientId</a></code> is not in the list of <var>account</var>["<code class="idl"><a data-link-type="idl" href="#dom-identityprovideraccount-approved_clients" id="ref-for-dom-identityprovideraccount-approved_clients①">approved_clients</a></code>"], then display the <var>metadata</var>["<code class="idl"><a data-link-type="idl" href="#dom-identityproviderclientmetadata-privacy_policy_url" id="ref-for-dom-identityproviderclientmetadata-privacy_policy_url②">privacy_policy_url</a></code>"] link.</p>
+      <p>If <var>metadata</var>["<code class="idl"><a data-link-type="idl" href="#dom-identityproviderclientmetadata-privacy_policy_url" id="ref-for-dom-identityproviderclientmetadata-privacy_policy_url②">privacy_policy_url</a></code>"] is defined and the <var>provider</var>’s <code class="idl"><a data-link-type="idl" href="#dom-identityproviderconfig-clientid" id="ref-for-dom-identityproviderconfig-clientid①">clientId</a></code> is not in the list of <var>account</var>["<code class="idl"><a data-link-type="idl" href="#dom-identityprovideraccount-approved_clients" id="ref-for-dom-identityprovideraccount-approved_clients①">approved_clients</a></code>"], then display the <var>metadata</var>["<code class="idl"><a data-link-type="idl" href="#dom-identityproviderclientmetadata-privacy_policy_url" id="ref-for-dom-identityproviderclientmetadata-privacy_policy_url③">privacy_policy_url</a></code>"] link.</p>
      <li data-md>
       <p>If <var>metadata</var> is not null, <var>metadata</var>["<code class="idl"><a data-link-type="idl" href="#dom-identityproviderclientmetadata-terms_of_service_url" id="ref-for-dom-identityproviderclientmetadata-terms_of_service_url②">terms_of_service_url</a></code>"] is defined,
 and the <var>provider</var>’s <code class="idl"><a data-link-type="idl" href="#dom-identityproviderconfig-clientid" id="ref-for-dom-identityproviderconfig-clientid②">clientId</a></code> is not in the list of <var>account</var>["<code class="idl"><a data-link-type="idl" href="#dom-identityprovideraccount-approved_clients" id="ref-for-dom-identityprovideraccount-approved_clients②">approved_clients</a></code>"], then display the <var>metadata</var>["<code class="idl"><a data-link-type="idl" href="#dom-identityproviderclientmetadata-terms_of_service_url" id="ref-for-dom-identityproviderclientmetadata-terms_of_service_url③">terms_of_service_url</a></code>"] link.</p>
@@ -1794,7 +1794,7 @@ and the <var>provider</var>’s <code class="idl"><a data-link-type="idl" href="
     </ol>
    </div>
    <div class="algorithm" data-algorithm="fetch the client metadata">
-     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="fetch-the-client-metadata">fetch the client metadata</dfn> given a <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderapiconfig" id="ref-for-dictdef-identityproviderapiconfig④">IdentityProviderAPIConfig</a></code> <var>manifest</var> and an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderconfig" id="ref-for-dictdef-identityproviderconfig⑧">IdentityProviderConfig</a></code> <var>provider</var>, run the following steps: 
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="fetch-the-client-metadata">fetch the client metadata</dfn> given an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderapiconfig" id="ref-for-dictdef-identityproviderapiconfig④">IdentityProviderAPIConfig</a></code> <var>manifest</var> and an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderconfig" id="ref-for-dictdef-identityproviderconfig⑧">IdentityProviderConfig</a></code> <var>provider</var>, run the following steps: 
     <ol>
      <li data-md>
       <p>Let <var>clientMetadataUrl</var> be the result of <a data-link-type="dfn" href="#computing-the-manifest-url" id="ref-for-computing-the-manifest-url①">computing the manifest URL</a> given <var>provider</var> and <var>manifest</var>["<code class="idl"><a data-link-type="idl" href="#dom-identityproviderapiconfig-client_metadata_endpoint" id="ref-for-dom-identityproviderapiconfig-client_metadata_endpoint①">client_metadata_endpoint</a></code>"].</p>
@@ -1868,7 +1868,7 @@ manually selects from the accounts chooser, or null if no account is selected.</
    </div>
    <div class="algorithm" data-algorithm="create tokens">
      To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="create-tokens">create tokens</dfn> given an <a data-link-type="dfn" href="#accountstate" id="ref-for-accountstate③">AccountState</a> <var>accountState</var>, a <code class="idl"><a data-link-type="idl" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString③③">USVString</a></code> <var>accountId</var>,
-    an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderconfig" id="ref-for-dictdef-identityproviderconfig⑨">IdentityProviderConfig</a></code> <var>provider</var>, and a <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderapiconfig" id="ref-for-dictdef-identityproviderapiconfig⑤">IdentityProviderAPIConfig</a></code> <var>manifest</var>: 
+    an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderconfig" id="ref-for-dictdef-identityproviderconfig⑨">IdentityProviderConfig</a></code> <var>provider</var>, and an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderapiconfig" id="ref-for-dictdef-identityproviderapiconfig⑤">IdentityProviderAPIConfig</a></code> <var>manifest</var>: 
     <ol>
      <li data-md>
       <p>Assert <var>accountState</var>’s <code class="idl"><a data-link-type="idl" href="#dom-accountstate-registration-state" id="ref-for-dom-accountstate-registration-state⑤">registration state</a></code> is <a data-link-type="dfn" href="#registered" id="ref-for-registered③">registered</a>.</p>
@@ -1928,7 +1928,7 @@ steps given a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#conce
     </ol>
    </div>
    <div class="algorithm" data-algorithm="fetch the manifest">
-     The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="fetch-the-manifest">fetch the manifest</dfn> algorithm accepts an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderconfig" id="ref-for-dictdef-identityproviderconfig①⓪">IdentityProviderConfig</a></code> <var>provider</var> and returns a <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderapiconfig" id="ref-for-dictdef-identityproviderapiconfig⑥">IdentityProviderAPIConfig</a></code> object: 
+     The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="fetch-the-manifest">fetch the manifest</dfn> algorithm accepts an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderconfig" id="ref-for-dictdef-identityproviderconfig①⓪">IdentityProviderConfig</a></code> <var>provider</var> and returns an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderapiconfig" id="ref-for-dictdef-identityproviderapiconfig⑥">IdentityProviderAPIConfig</a></code> object: 
     <ol>
      <li data-md>
       <p>In parallel, perform the following two steps:</p>
@@ -1995,7 +1995,7 @@ steps given a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#conce
        <li data-md>
         <p>Let <var>json</var> be the result of <a data-link-type="dfn" href="#extract-the-json-fetch-response" id="ref-for-extract-the-json-fetch-response③">extract the JSON fetch response</a> from <var>response</var>.</p>
        <li data-md>
-        <p><a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value" id="ref-for-dfn-convert-ecmascript-to-idl-value⑦">Convert</a> <var>json</var> to a <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderwellknown" id="ref-for-dictdef-identityproviderwellknown①">IdentityProviderWellKnown</a></code>, <var>discovery</var>.</p>
+        <p><a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value" id="ref-for-dfn-convert-ecmascript-to-idl-value⑦">Convert</a> <var>json</var> to an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderwellknown" id="ref-for-dictdef-identityproviderwellknown①">IdentityProviderWellKnown</a></code>, <var>discovery</var>.</p>
        <li data-md>
         <p>If the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-size" id="ref-for-list-size②">size</a> of <var>discovery</var>["<code class="idl"><a data-link-type="idl" href="#dom-identityproviderwellknown-provider_urls" id="ref-for-dom-identityproviderwellknown-provider_urls">provider_urls</a></code>""] is greater than 1, return.</p>
         <p class="issue" id="issue-80d5b61c"><a class="self-link" href="#issue-80d5b61c"></a> <a href="https://github.com/fedidcg/FedCM/issues/333">relax</a> the size of the provider_urls array.</p>
@@ -2007,7 +2007,7 @@ steps given a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#conce
     </ol>
    </div>
    <div class="algorithm" data-algorithm="fetch the internal manifest">
-     The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="fetch-the-internal-manifest">fetch the internal manifest</dfn> algorithm accepts an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderconfig" id="ref-for-dictdef-identityproviderconfig①②">IdentityProviderConfig</a></code> <var>provider</var> and returns a <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderapiconfig" id="ref-for-dictdef-identityproviderapiconfig⑦">IdentityProviderAPIConfig</a></code> or null if there is some failure fetching or parsing the manifest: 
+     The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="fetch-the-internal-manifest">fetch the internal manifest</dfn> algorithm accepts an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderconfig" id="ref-for-dictdef-identityproviderconfig①②">IdentityProviderConfig</a></code> <var>provider</var> and returns an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderapiconfig" id="ref-for-dictdef-identityproviderapiconfig⑦">IdentityProviderAPIConfig</a></code> or null if there is some failure fetching or parsing the manifest: 
     <ol>
      <li data-md>
       <p>Let <var>configUrl</var> be the result of running <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-parser" id="ref-for-concept-url-parser⑤">url parser</a> with <var>provider</var>’s <code class="idl"><a data-link-type="idl" href="#dom-identityproviderconfig-configurl" id="ref-for-dom-identityproviderconfig-configurl⑤">configURL</a></code>.</p>
@@ -2053,7 +2053,7 @@ steps given a <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#conce
        <li data-md>
         <p>Let <var>json</var> be the result of <a data-link-type="dfn" href="#extract-the-json-fetch-response" id="ref-for-extract-the-json-fetch-response④">extract the JSON fetch response</a> from <var>response</var>.</p>
        <li data-md>
-        <p><a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value" id="ref-for-dfn-convert-ecmascript-to-idl-value⑧">Convert</a> <var>json</var> to a <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderapiconfig" id="ref-for-dictdef-identityproviderapiconfig⑨">IdentityProviderAPIConfig</a></code>, <var>fetchedConfig</var>.</p>
+        <p><a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value" id="ref-for-dfn-convert-ecmascript-to-idl-value⑧">Convert</a> <var>json</var> to an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderapiconfig" id="ref-for-dictdef-identityproviderapiconfig⑨">IdentityProviderAPIConfig</a></code>, <var>fetchedConfig</var>.</p>
        <li data-md>
         <p>Copy <var>fetchedConfig</var> into <var>manifest</var>.</p>
       </ol>
@@ -2568,7 +2568,7 @@ IdP-Sign-in-Status: action=logout
    </dl>
    <p>The <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#user-agent" id="ref-for-user-agent③①">user agent</a> uses the following <a data-link-type="dfn" href="#maybe-fetch-the-accounts-list" id="ref-for-maybe-fetch-the-accounts-list">maybe fetch the accounts list</a> in the <a data-link-type="dfn" href="#potentially-create-identitycredential" id="ref-for-potentially-create-identitycredential②">potentially create IdentityCredential</a> algorithm, as opposed to the <a data-link-type="dfn" href="#fetch-the-accounts-list" id="ref-for-fetch-the-accounts-list①">fetch the accounts list</a> algorithm. It would also return early on the <a data-link-type="dfn" href="#potentially-create-identitycredential" id="ref-for-potentially-create-identitycredential③">potentially create IdentityCredential</a> algorithm if the user was <code class="idl"><a data-link-type="idl" href="#dom-sign-in-status-signed-out" id="ref-for-dom-sign-in-status-signed-out①">signed-out</a></code>.</p>
    <div class="algorithm" data-algorithm="maybe fetch the accounts list">
-     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="maybe-fetch-the-accounts-list">maybe fetch the accounts list</dfn> given a <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderapiconfig" id="ref-for-dictdef-identityproviderapiconfig①①">IdentityProviderAPIConfig</a></code> <var>manifest</var> and an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderconfig" id="ref-for-dictdef-identityproviderconfig①③">IdentityProviderConfig</a></code> <var>provider</var>: 
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="maybe-fetch-the-accounts-list">maybe fetch the accounts list</dfn> given an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderapiconfig" id="ref-for-dictdef-identityproviderapiconfig①①">IdentityProviderAPIConfig</a></code> <var>manifest</var> and an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderconfig" id="ref-for-dictdef-identityproviderconfig①③">IdentityProviderConfig</a></code> <var>provider</var>: 
     <ol>
      <li data-md>
       <p>Let <var>configUrl</var> be the result of running <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-parser" id="ref-for-concept-url-parser⑥">url parser</a> with <var>provider</var>’s <code class="idl"><a data-link-type="idl" href="#dom-identityproviderconfig-configurl" id="ref-for-dom-identityproviderconfig-configurl⑥">configURL</a></code>.</p>
@@ -2616,7 +2616,7 @@ IdP-Sign-in-Status: action=logout
     </ol>
    </div>
    <div class="algorithm" data-algorithm="Sign-in to the IDP">
-     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="sign-in-to-the-idp">Sign-in to the IDP</dfn> given a <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderapiconfig" id="ref-for-dictdef-identityproviderapiconfig①②">IdentityProviderAPIConfig</a></code> <var>manifest</var> and an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderconfig" id="ref-for-dictdef-identityproviderconfig①④">IdentityProviderConfig</a></code> <var>provider</var>: 
+     To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="sign-in-to-the-idp">Sign-in to the IDP</dfn> given an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderapiconfig" id="ref-for-dictdef-identityproviderapiconfig①②">IdentityProviderAPIConfig</a></code> <var>manifest</var> and an <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderconfig" id="ref-for-dictdef-identityproviderconfig①④">IdentityProviderConfig</a></code> <var>provider</var>: 
     <ol>
      <li data-md>
       <p>Let <var>configUrl</var> be the result of running <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url-parser" id="ref-for-concept-url-parser⑦">url parser</a> with <var>provider</var>’s <code class="idl"><a data-link-type="idl" href="#dom-identityproviderconfig-configurl" id="ref-for-dom-identityproviderconfig-configurl⑦">configURL</a></code>.</p>
@@ -4992,7 +4992,7 @@ preventing token reuse(see Mozilla’s <a href="https://wiki.mozilla.org/Identit
    <ul>
     <li><a href="#ref-for-dom-identityproviderclientmetadata-privacy_policy_url">3. Terminology</a>
     <li><a href="#ref-for-dom-identityproviderclientmetadata-privacy_policy_url①">5.3. Client Metadata</a>
-    <li><a href="#ref-for-dom-identityproviderclientmetadata-privacy_policy_url②">7.4. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method</a>
+    <li><a href="#ref-for-dom-identityproviderclientmetadata-privacy_policy_url②">7.4. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method</a> <a href="#ref-for-dom-identityproviderclientmetadata-privacy_policy_url③">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-identityproviderclientmetadata-terms_of_service_url">
