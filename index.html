@@ -6,7 +6,7 @@
   <link href="https://www.w3.org/StyleSheets/TR/2021/cg-draft" rel="stylesheet">
   <meta content="Bikeshed version 859efb4bd, updated Fri Jan 27 16:04:01 2023 -0800" name="generator">
   <link href="https://fedidcg.github.io/FedCM/" rel="canonical">
-  <meta content="ee179260c8c4aed98be8c51c59873f9027a7f2b4" name="document-revision">
+  <meta content="97004a2f18348570033f42c391f95ac7d5d8f5e2" name="document-revision">
 <style>
 dl.domintro dt {
     font-family: Menlo, Consolas, "DejaVu Sans Mono", Monaco, monospace;
@@ -616,7 +616,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Federated Credential Management API</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#CG-DRAFT">Draft Community Group Report</a>, <time class="dt-updated" datetime="2023-02-07">7 February 2023</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#CG-DRAFT">Draft Community Group Report</a>, <time class="dt-updated" datetime="2023-02-08">8 February 2023</time></p>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1298,9 +1298,9 @@ the following properties:</p>
     <dt data-md><dfn class="dfn-paneled idl-code" data-dfn-for="AccountState" data-dfn-type="argument" data-export id="dom-accountstate-allows-logout"><code>allows logout</code></dfn>
     <dd data-md>
      <p>Boolean which keeps track of whether the user agent would allow the <var>account</var> to be logged
-out via <code class="idl"><a data-link-type="idl" href="https://fedidcg.github.io/FedCM/#dom-identitycredential-logoutrps" id="ref-for-dom-identitycredential-logoutrps">logoutRPs()</a></code>. It is initialized to false by default. Note that
+out via <code class="idl"><a data-link-type="idl">logoutRPs()</a></code>. It is initialized to false by default. Note that
 this value being true does not imply that the user is logged in to the <a data-link-type="dfn" href="#rp" id="ref-for-rp②①">RP</a> with the
-account, it merely implies that <code class="idl"><a data-link-type="idl" href="https://fedidcg.github.io/FedCM/#dom-identitycredential-logoutrps" id="ref-for-dom-identitycredential-logoutrps①">logoutRPs()</a></code> has not yet been called
+account, it merely implies that <code class="idl"><a data-link-type="idl">logoutRPs()</a></code> has not yet been called
 on this account after the last successful <code class="idl"><a data-link-type="idl" href="#identitycredential" id="ref-for-identitycredential③">IdentityCredential</a></code> creation with this account.</p>
    </dl>
    <p>TODO: add an ASCII image to explain how the states fit into the algorithms.</p>
@@ -3244,12 +3244,6 @@ preventing token reuse(see Mozilla’s <a href="https://wiki.mozilla.org/Identit
     <li><a href="#ref-for-utf-8-encode">3.4. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="term-for-dom-identitycredential-logoutrps">
-   <a href="https://fedidcg.github.io/FedCM/#dom-identitycredential-logoutrps">https://fedidcg.github.io/FedCM/#dom-identitycredential-logoutrps</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-identitycredential-logoutrps">3.1. The State Machine</a> <a href="#ref-for-dom-identitycredential-logoutrps①">(2)</a>
-   </ul>
-  </aside>
   <aside class="dfn-panel" data-for="term-for-concept-request-body">
    <a href="https://fetch.spec.whatwg.org/#concept-request-body">https://fetch.spec.whatwg.org/#concept-request-body</a><b>Referenced in:</b>
    <ul>
@@ -3779,11 +3773,6 @@ preventing token reuse(see Mozilla’s <a href="https://wiki.mozilla.org/Identit
      <li><span class="dfn-paneled" id="term-for-utf-8-encode">utf-8 encode</span>
     </ul>
    <li>
-    <a data-link-type="biblio">[FEDCM]</a> defines the following terms:
-    <ul>
-     <li><span class="dfn-paneled" id="term-for-dom-identitycredential-logoutrps">logoutRPs(logoutRequests)</span>
-    </ul>
-   <li>
     <a data-link-type="biblio">[FETCH]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="term-for-concept-request-body">body</span>
@@ -3912,8 +3901,6 @@ preventing token reuse(see Mozilla’s <a href="https://wiki.mozilla.org/Identit
    <dd>Anne van Kesteren. <a href="https://dom.spec.whatwg.org/"><cite>DOM Standard</cite></a>. Living Standard. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
    <dt id="biblio-encoding">[ENCODING]
    <dd>Anne van Kesteren. <a href="https://encoding.spec.whatwg.org/"><cite>Encoding Standard</cite></a>. Living Standard. URL: <a href="https://encoding.spec.whatwg.org/">https://encoding.spec.whatwg.org/</a>
-   <dt id="biblio-fedcm">[FEDCM]
-   <dd>Federated Credential Management API URL: <a href="https://fedidcg.github.io/FedCM/">https://fedidcg.github.io/FedCM/</a>
    <dt id="biblio-fetch">[FETCH]
    <dd>Anne van Kesteren. <a href="https://fetch.spec.whatwg.org/"><cite>Fetch Standard</cite></a>. Living Standard. URL: <a href="https://fetch.spec.whatwg.org/">https://fetch.spec.whatwg.org/</a>
    <dt id="biblio-fetch-metadata">[FETCH-METADATA]
