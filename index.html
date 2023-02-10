@@ -6,7 +6,7 @@
   <link href="https://www.w3.org/StyleSheets/TR/2021/cg-draft" rel="stylesheet">
   <meta content="Bikeshed version 859efb4bd, updated Fri Jan 27 16:04:01 2023 -0800" name="generator">
   <link href="https://fedidcg.github.io/FedCM/" rel="canonical">
-  <meta content="2f60d5665b0e4b41bec6cc4ea970a135e40524a5" name="document-revision">
+  <meta content="359ebbfde0733be43f279aa7f6c6b6631da6669c" name="document-revision">
 <style>
 dl.domintro dt {
     font-family: Menlo, Consolas, "DejaVu Sans Mono", Monaco, monospace;
@@ -662,7 +662,7 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
       <li><a href="#browser-api-identity-credential-interface"><span class="secno">2.2</span> <span class="content">The IdentityCredential Interface</span></a>
      </ol>
     <li>
-     <a href="#idp-api"><span class="secno">3</span> <span class="content">Identity Provider Server Endpoints</span></a>
+     <a href="#idp-api"><span class="secno">3</span> <span class="content">Identity Provider HTTP API</span></a>
      <ol class="toc">
       <li><a href="#idp-api-well-known"><span class="secno">3.1</span> <span class="content">The Well-Known File</span></a>
       <li><a href="#idp-api-manifest"><span class="secno">3.2</span> <span class="content">Manifest</span></a>
@@ -784,7 +784,7 @@ could be implemented.
    </div>
    <p>At a high level, the Federated Credential Management API works by the
 intermediation of cooperating <a data-link-type="dfn" href="#idp" id="ref-for-idp②">IDP</a>s and <a data-link-type="dfn" href="#rp" id="ref-for-rp②">RP</a>s.</p>
-   <p>The <a href="#idp-api">§ 3 Identity Provider Server Endpoints</a> defines a set of HTTP APIs that cooperating <a data-link-type="dfn" href="#idp" id="ref-for-idp③">IDP</a>s and <a data-link-type="dfn" href="#idp" id="ref-for-idp④">IDP</a>s exposes as well as the entry points in the <a href="#browser-api">§ 2 The Browser API</a> that they can use.</p>
+   <p>The <a href="#idp-api">§ 3 Identity Provider HTTP API</a> defines a set of HTTP APIs that cooperating <a data-link-type="dfn" href="#idp" id="ref-for-idp③">IDP</a>s and <a data-link-type="dfn" href="#idp" id="ref-for-idp④">IDP</a>s exposes as well as the entry points in the <a href="#browser-api">§ 2 The Browser API</a> that they can use.</p>
 <script type="text/typogram">
 +-----------+                  +-----------+                      +-----------+
 |           |                  |           |                      |           |
@@ -1649,7 +1649,7 @@ manually selects from the accounts chooser, or failure if no account is selected
     </ol>
    </div>
    <p class="issue" id="issue-96c0c7c6"><a class="self-link" href="#issue-96c0c7c6"></a> Displaying an account chooser displaying all of the provided options should not be included normatively</p>
-   <h2 class="heading settled" data-level="3" id="idp-api"><span class="secno">3. </span><span class="content">Identity Provider Server Endpoints</span><a class="self-link" href="#idp-api"></a></h2>
+   <h2 class="heading settled" data-level="3" id="idp-api"><span class="secno">3. </span><span class="content">Identity Provider HTTP API</span><a class="self-link" href="#idp-api"></a></h2>
    <p><em>This section is non-normative.</em></p>
    <p>The <a data-link-type="dfn" href="#idp" id="ref-for-idp②⓪">IDP</a> proactively and cooperatively exposes itself as a comformant agent
 by exposing a series of HTTP endpoints:</p>
@@ -4032,7 +4032,7 @@ that is being explored <a href="https://github.com/fedidcg/FedCM/issues/230#issu
     <li><a href="#ref-for-idp⑤">2. The Browser API</a> <a href="#ref-for-idp⑥">(2)</a> <a href="#ref-for-idp⑦">(3)</a>
     <li><a href="#ref-for-idp⑧">2.1. The State Machine</a> <a href="#ref-for-idp⑨">(2)</a>
     <li><a href="#ref-for-idp①⓪">2.2. The IdentityCredential Interface</a> <a href="#ref-for-idp①①">(2)</a> <a href="#ref-for-idp①②">(3)</a> <a href="#ref-for-idp①③">(4)</a> <a href="#ref-for-idp①④">(5)</a> <a href="#ref-for-idp①⑤">(6)</a> <a href="#ref-for-idp①⑥">(7)</a> <a href="#ref-for-idp①⑦">(8)</a> <a href="#ref-for-idp①⑧">(9)</a> <a href="#ref-for-idp①⑨">(10)</a>
-    <li><a href="#ref-for-idp②⓪">3. Identity Provider Server Endpoints</a> <a href="#ref-for-idp②①">(2)</a>
+    <li><a href="#ref-for-idp②⓪">3. Identity Provider HTTP API</a> <a href="#ref-for-idp②①">(2)</a>
     <li><a href="#ref-for-idp②②">3.1. The Well-Known File</a> <a href="#ref-for-idp②③">(2)</a>
     <li><a href="#ref-for-idp②④">3.2. Manifest</a> <a href="#ref-for-idp②⑤">(2)</a> <a href="#ref-for-idp②⑥">(3)</a> <a href="#ref-for-idp②⑦">(4)</a>
     <li><a href="#ref-for-idp②⑧">3.3. Accounts List</a> <a href="#ref-for-idp②⑨">(2)</a> <a href="#ref-for-idp③⓪">(3)</a>
