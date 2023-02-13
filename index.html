@@ -6,7 +6,7 @@
   <link href="https://www.w3.org/StyleSheets/TR/2021/cg-draft" rel="stylesheet">
   <meta content="Bikeshed version 859efb4bd, updated Fri Jan 27 16:04:01 2023 -0800" name="generator">
   <link href="https://fedidcg.github.io/FedCM/" rel="canonical">
-  <meta content="359ebbfde0733be43f279aa7f6c6b6631da6669c" name="document-revision">
+  <meta content="666226bd5e1e23360cd6418b8781dbe59ff280ca" name="document-revision">
 <style>
 dl.domintro dt {
     font-family: Menlo, Consolas, "DejaVu Sans Mono", Monaco, monospace;
@@ -616,7 +616,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Federated Credential Management API</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#CG-DRAFT">Draft Community Group Report</a>, <time class="dt-updated" datetime="2023-02-10">10 February 2023</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#CG-DRAFT">Draft Community Group Report</a>, <time class="dt-updated" datetime="2023-02-13">13 February 2023</time></p>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -659,7 +659,12 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
      <a href="#browser-api"><span class="secno">2</span> <span class="content">The Browser API</span></a>
      <ol class="toc">
       <li><a href="#browser-api-state-machine"><span class="secno">2.1</span> <span class="content">The State Machine</span></a>
-      <li><a href="#browser-api-identity-credential-interface"><span class="secno">2.2</span> <span class="content">The IdentityCredential Interface</span></a>
+      <li>
+       <a href="#browser-api-identity-credential-interface"><span class="secno">2.2</span> <span class="content">The IdentityCredential Interface</span></a>
+       <ol class="toc">
+        <li><a href="#browser-api-credential-request-options"><span class="secno">2.2.1</span> <span class="content">The CredentialRequestOptions ## {#browser-api-credential-request-options}</span></a>
+        <li><a href="#browser-api-rp-sign-in"><span class="secno">2.2.2</span> <span class="content">The <code>[[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors)</code> internal method ## {#browser-api-rp-sign-in}</span></a>
+       </ol>
      </ol>
     <li>
      <a href="#idp-api"><span class="secno">3</span> <span class="content">Identity Provider HTTP API</span></a>
@@ -990,7 +995,8 @@ It represents the minted <code class="idl"><a data-link-type="idl" href="#dom-id
    </dl>
    <p>The main entrypoint in this specification is through the entrypoints exposed
 by the <a data-link-type="biblio" href="https://w3c.github.io/webappsec-credential-management/"><cite>Credential Management</cite></a> API.</p>
-   <p>This specification introduces an extension to the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/webappsec-credential-management/#dictdef-credentialrequestoptions" id="ref-for-dictdef-credentialrequestoptions">CredentialRequestOptions</a></code> object:</p>
+   <h4 class="heading settled" data-level="2.2.1" id="browser-api-credential-request-options"><span class="secno">2.2.1. </span><span class="content">The CredentialRequestOptions ## {#browser-api-credential-request-options}</span><a class="self-link" href="#browser-api-credential-request-options"></a></h4>
+   <p>This specification starts by introducing an extension to the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/webappsec-credential-management/#dictdef-credentialrequestoptions" id="ref-for-dictdef-credentialrequestoptions">CredentialRequestOptions</a></code> object:</p>
 <pre class="idl highlight def"><c- b>partial</c-> <c- b>dictionary</c-> <a class="idl-code" data-link-type="dictionary" href="https://w3c.github.io/webappsec-credential-management/#dictdef-credentialrequestoptions" id="ref-for-dictdef-credentialrequestoptions①"><c- g>CredentialRequestOptions</c-></a> {
   <a data-link-type="idl-name" href="#dictdef-identitycredentialrequestoptions" id="ref-for-dictdef-identitycredentialrequestoptions"><c- n>IdentityCredentialRequestOptions</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="CredentialRequestOptions" data-dfn-type="dict-member" data-export data-type="IdentityCredentialRequestOptions " id="dom-credentialrequestoptions-identity"><code><c- g>identity</c-></code></dfn>;
 };
@@ -1022,6 +1028,7 @@ the <a data-link-type="dfn" href="#rp" id="ref-for-rp①①">RP</a> supports (e.
 session with a <code class="idl"><a data-link-type="idl" href="#dom-identityprovidertoken-token" id="ref-for-dom-identityprovidertoken-token①">token</a></code> and to mitigate replay attacks. Therefore, this value should have
 sufficient entropy such that it would be hard to guess.</p>
    </dl>
+   <h4 class="heading settled" data-level="2.2.2" id="browser-api-rp-sign-in"><span class="secno">2.2.2. </span><span class="content">The <code>[[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors)</code> internal method ## {#browser-api-rp-sign-in}</span><a class="self-link" href="#browser-api-rp-sign-in"></a></h4>
    <p>The <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/webappsec-credential-management/#dom-credential-discoverfromexternalsource-slot" id="ref-for-dom-credential-discoverfromexternalsource-slot">[[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors)</a></code> algorithm runs in parallel inside the <a href="https://w3c.github.io/webappsec-credential-management/#algorithm-request">Credential Management § algorithm-request</a> to request credentials and returns a
 set of <code class="idl"><a data-link-type="idl" href="#identitycredential" id="ref-for-identitycredential③">IdentityCredential</a></code> for the requested <a data-link-type="dfn" href="#idp" id="ref-for-idp①③">IDP</a>s.</p>
    <p>This <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-ordinary-object-internal-methods-and-internal-slots" id="ref-for-sec-ordinary-object-internal-methods-and-internal-slots">internal method</a> accepts three arguments:</p>
@@ -1383,7 +1390,6 @@ store the result in <var>accountsList</var>.</p>
   <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString①⑥"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="USVString " href="#dom-identityprovideraccount-picture" id="ref-for-dom-identityprovideraccount-picture①"><c- g>picture</c-></a>;
   <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#idl-sequence" id="ref-for-idl-sequence③"><c- b>sequence</c-></a>&lt;<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString①⑦"><c- b>USVString</c-></a>> <a class="idl-code" data-link-type="dict-member" data-type="sequence<USVString> " href="#dom-identityprovideraccount-approved_clients" id="ref-for-dom-identityprovideraccount-approved_clients"><c- g>approved_clients</c-></a>;
 };
-
 <c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-identityprovideraccountlist"><code><c- g>IdentityProviderAccountList</c-></code></dfn> {
   <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#idl-sequence" id="ref-for-idl-sequence④"><c- b>sequence</c-></a>&lt;<a data-link-type="idl-name" href="#dictdef-identityprovideraccount" id="ref-for-dictdef-identityprovideraccount①"><c- n>IdentityProviderAccount</c-></a>> <dfn class="idl-code" data-dfn-for="IdentityProviderAccountList" data-dfn-type="dict-member" data-export data-type="sequence<IdentityProviderAccount> " id="dom-identityprovideraccountlist-accounts"><code><c- g>accounts</c-></code><a class="self-link" href="#dom-identityprovideraccountlist-accounts"></a></dfn>;
 };
@@ -1648,7 +1654,6 @@ manually selects from the accounts chooser, or failure if no account is selected
       <p>Return <var>account</var>.</p>
     </ol>
    </div>
-   <p class="issue" id="issue-96c0c7c6"><a class="self-link" href="#issue-96c0c7c6"></a> Displaying an account chooser displaying all of the provided options should not be included normatively</p>
    <h2 class="heading settled" data-level="3" id="idp-api"><span class="secno">3. </span><span class="content">Identity Provider HTTP API</span><a class="self-link" href="#idp-api"></a></h2>
    <p><em>This section is non-normative.</em></p>
    <p>The <a data-link-type="dfn" href="#idp" id="ref-for-idp②⓪">IDP</a> proactively and cooperatively exposes itself as a comformant agent
@@ -1699,7 +1704,8 @@ network requests performed:</p>
 <c- e>Sec-Fetch-Dest</c-><c- o>:</c-> <c- l>webidentity</c->
 </pre>
    </div>
-   <p>The file is parsed expecting a <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderwellknown" id="ref-for-dictdef-identityproviderwellknown①">IdentityProviderWellKnown</a></code> JSON object with the following semantics:</p>
+   <p>The file is parsed expecting a <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderwellknown" id="ref-for-dictdef-identityproviderwellknown①">IdentityProviderWellKnown</a></code> JSON object.</p>
+   <p>The <code class="idl"><a data-link-type="idl" href="#dictdef-identityproviderwellknown" id="ref-for-dictdef-identityproviderwellknown②">IdentityProviderWellKnown</a></code> JSON object has the following semantics:</p>
    <dl>
     <dt data-md><dfn class="dfn-paneled idl-code" data-dfn-for="IdentityProviderWellKnown" data-dfn-type="dict-member" data-export id="dom-identityproviderwellknown-provider_urls"><code>provider_urls</code></dfn> (required), <span> of type sequence&lt;<a data-link-type="idl-name" href="https://webidl.spec.whatwg.org/#idl-USVString" id="ref-for-idl-USVString②②">USVString</a>></span>
     <dd data-md>
@@ -1712,7 +1718,7 @@ which serves as a discovery device to other endpoints provided by the <a data-li
    <p>(a) <strong>without</strong> cookies,
 (b) <strong>with</strong> the <a data-link-type="http-header" href="https://w3c.github.io/webappsec-fetch-metadata/#http-headerdef-sec-fetch-dest" id="ref-for-http-headerdef-sec-fetch-dest①">Sec-Fetch-Dest</a> header set to <code>webidentity</code>,
 (c) <strong>without</strong> revealing the <a data-link-type="dfn" href="#rp" id="ref-for-rp①⑨">RP</a> in the <a data-link-type="http-header" href="https://fetch.spec.whatwg.org/#http-origin" id="ref-for-http-origin①">Origin</a> or <a href="https://httpwg.org/specs/rfc9110.html#field.referer">Referer</a> headers, and
-(d) <strong>without</strong> following <a href="https://httpwg.org/specs/rfc9110.html#field.location">HTTP redirects</a>.</p>
+(c) <strong>without</strong> following <a href="https://httpwg.org/specs/rfc9110.html#field.location">HTTP redirects</a>.</p>
    <p>For example:</p>
    <div class="example" id="example-568d2573">
     <a class="self-link" href="#example-568d2573"></a> 
@@ -3046,13 +3052,13 @@ preventing token reuse(see Mozilla’s <a href="https://wiki.mozilla.org/Identit
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
-   <li><a href="#dom-identityprovideraccountlist-accounts">accounts</a><span>, in § 2.2</span>
+   <li><a href="#dom-identityprovideraccountlist-accounts">accounts</a><span>, in § 2.2.2</span>
    <li><a href="#dom-identityproviderapiconfig-accounts_endpoint">accounts_endpoint</a><span>, in § 3.2</span>
    <li><a href="#accountstate">AccountState</a><span>, in § 2.1</span>
    <li><a href="#dom-identityprovideraccount-approved_clients">approved_clients</a><span>, in § 3.3</span>
    <li><a href="#dom-identityproviderbranding-background_color">background_color</a><span>, in § 3.2</span>
    <li><a href="#dom-identityproviderapiconfig-branding">branding</a><span>, in § 3.2</span>
-   <li><a href="#dom-identityproviderconfig-clientid">clientId</a><span>, in § 2.2</span>
+   <li><a href="#dom-identityproviderconfig-clientid">clientId</a><span>, in § 2.2.1</span>
    <li><a href="#dom-identityproviderapiconfig-client_metadata_endpoint">client_metadata_endpoint</a><span>, in § 3.2</span>
    <li>
     color
@@ -3061,46 +3067,46 @@ preventing token reuse(see Mozilla’s <a href="https://wiki.mozilla.org/Identit
      <li><a href="#dom-identityproviderbranding-color">dict-member for IdentityProviderBranding</a><span>, in § 3.2</span>
     </ul>
    <li><a href="#compute-account-state">compute account state</a><span>, in § 2.1</span>
-   <li><a href="#computing-the-manifest-url">computing the manifest URL</a><span>, in § 2.2</span>
-   <li><a href="#dom-identityproviderconfig-configurl">configURL</a><span>, in § 2.2</span>
-   <li><a href="#create-an-identitycredential">create an IdentityCredential</a><span>, in § 2.2</span>
-   <li><a href="#dom-identitycredential-discoverfromexternalsource-slot">[[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors)</a><span>, in § 2.2</span>
+   <li><a href="#computing-the-manifest-url">computing the manifest URL</a><span>, in § 2.2.2</span>
+   <li><a href="#dom-identityproviderconfig-configurl">configURL</a><span>, in § 2.2.1</span>
+   <li><a href="#create-an-identitycredential">create an IdentityCredential</a><span>, in § 2.2.2</span>
+   <li><a href="#dom-identitycredential-discoverfromexternalsource-slot">[[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors)</a><span>, in § 2.2.2</span>
    <li><a href="#dom-identityprovideraccount-email">email</a><span>, in § 3.3</span>
-   <li><a href="#extract-the-json-fetch-response">extract the JSON fetch response</a><span>, in § 2.2</span>
-   <li><a href="#fetch-an-identity-assertion">fetch an identity assertion</a><span>, in § 2.2</span>
-   <li><a href="#fetch-request">fetch request</a><span>, in § 2.2</span>
-   <li><a href="#fetch-the-account-picture">fetch the account picture</a><span>, in § 2.2</span>
-   <li><a href="#fetch-the-accounts-list">fetch the accounts list</a><span>, in § 2.2</span>
-   <li><a href="#fetch-the-client-metadata">fetch the client metadata</a><span>, in § 2.2</span>
-   <li><a href="#fetch-the-config-file">fetch the config file</a><span>, in § 2.2</span>
+   <li><a href="#extract-the-json-fetch-response">extract the JSON fetch response</a><span>, in § 2.2.2</span>
+   <li><a href="#fetch-an-identity-assertion">fetch an identity assertion</a><span>, in § 2.2.2</span>
+   <li><a href="#fetch-request">fetch request</a><span>, in § 2.2.2</span>
+   <li><a href="#fetch-the-account-picture">fetch the account picture</a><span>, in § 2.2.2</span>
+   <li><a href="#fetch-the-accounts-list">fetch the accounts list</a><span>, in § 2.2.2</span>
+   <li><a href="#fetch-the-client-metadata">fetch the client metadata</a><span>, in § 2.2.2</span>
+   <li><a href="#fetch-the-config-file">fetch the config file</a><span>, in § 2.2.2</span>
    <li><a href="#dom-identityprovideraccount-given_name">given_name</a><span>, in § 3.3</span>
    <li><a href="#dom-identityproviderbranding-icons">icons</a><span>, in § 3.2</span>
    <li><a href="#dom-identityprovideraccount-id">id</a><span>, in § 3.3</span>
    <li><a href="#dom-identityproviderapiconfig-id_assertion_endpoint">id_assertion_endpoint</a><span>, in § 3.2</span>
-   <li><a href="#dom-credentialrequestoptions-identity">identity</a><span>, in § 2.2</span>
+   <li><a href="#dom-credentialrequestoptions-identity">identity</a><span>, in § 2.2.1</span>
    <li><a href="#identitycredential">IdentityCredential</a><span>, in § 2.2</span>
-   <li><a href="#dictdef-identitycredentialrequestoptions">IdentityCredentialRequestOptions</a><span>, in § 2.2</span>
+   <li><a href="#dictdef-identitycredentialrequestoptions">IdentityCredentialRequestOptions</a><span>, in § 2.2.1</span>
    <li><a href="#identity-credentials-get">identity-credentials-get</a><span>, in § 4</span>
-   <li><a href="#dictdef-identityprovideraccount">IdentityProviderAccount</a><span>, in § 2.2</span>
-   <li><a href="#dictdef-identityprovideraccountlist">IdentityProviderAccountList</a><span>, in § 2.2</span>
-   <li><a href="#dictdef-identityproviderapiconfig">IdentityProviderAPIConfig</a><span>, in § 2.2</span>
-   <li><a href="#dictdef-identityproviderbranding">IdentityProviderBranding</a><span>, in § 2.2</span>
-   <li><a href="#dictdef-identityproviderclientmetadata">IdentityProviderClientMetadata</a><span>, in § 2.2</span>
-   <li><a href="#dictdef-identityproviderconfig">IdentityProviderConfig</a><span>, in § 2.2</span>
-   <li><a href="#dictdef-identityprovidericon">IdentityProviderIcon</a><span>, in § 2.2</span>
-   <li><a href="#dictdef-identityprovidertoken">IdentityProviderToken</a><span>, in § 2.2</span>
-   <li><a href="#dictdef-identityproviderwellknown">IdentityProviderWellKnown</a><span>, in § 2.2</span>
+   <li><a href="#dictdef-identityprovideraccount">IdentityProviderAccount</a><span>, in § 2.2.2</span>
+   <li><a href="#dictdef-identityprovideraccountlist">IdentityProviderAccountList</a><span>, in § 2.2.2</span>
+   <li><a href="#dictdef-identityproviderapiconfig">IdentityProviderAPIConfig</a><span>, in § 2.2.2</span>
+   <li><a href="#dictdef-identityproviderbranding">IdentityProviderBranding</a><span>, in § 2.2.2</span>
+   <li><a href="#dictdef-identityproviderclientmetadata">IdentityProviderClientMetadata</a><span>, in § 2.2.2</span>
+   <li><a href="#dictdef-identityproviderconfig">IdentityProviderConfig</a><span>, in § 2.2.1</span>
+   <li><a href="#dictdef-identityprovidericon">IdentityProviderIcon</a><span>, in § 2.2.2</span>
+   <li><a href="#dictdef-identityprovidertoken">IdentityProviderToken</a><span>, in § 2.2.2</span>
+   <li><a href="#dictdef-identityproviderwellknown">IdentityProviderWellKnown</a><span>, in § 2.2.2</span>
    <li><a href="#idp">IDP</a><span>, in § 1</span>
    <li><a href="#dom-identityprovideraccount-name">name</a><span>, in § 3.3</span>
-   <li><a href="#dom-identityproviderconfig-nonce">nonce</a><span>, in § 2.2</span>
-   <li><a href="#parse-url">parse url</a><span>, in § 2.2</span>
+   <li><a href="#dom-identityproviderconfig-nonce">nonce</a><span>, in § 2.2.1</span>
+   <li><a href="#parse-url">parse url</a><span>, in § 2.2.2</span>
    <li><a href="#dom-identityprovideraccount-picture">picture</a><span>, in § 3.3</span>
    <li><a href="#dom-identityproviderclientmetadata-privacy_policy_url">privacy_policy_url</a><span>, in § 3.4</span>
-   <li><a href="#dom-identitycredentialrequestoptions-providers">providers</a><span>, in § 2.2</span>
+   <li><a href="#dom-identitycredentialrequestoptions-providers">providers</a><span>, in § 2.2.1</span>
    <li><a href="#dom-identityproviderwellknown-provider_urls">provider_urls</a><span>, in § 3.1</span>
-   <li><a href="#request-permission-to-sign-up">request permission to sign-up</a><span>, in § 2.2</span>
+   <li><a href="#request-permission-to-sign-up">request permission to sign-up</a><span>, in § 2.2.2</span>
    <li><a href="#rp">RP</a><span>, in § 1</span>
-   <li><a href="#select-an-account">select an account</a><span>, in § 2.2</span>
+   <li><a href="#select-an-account">select an account</a><span>, in § 2.2.2</span>
    <li><a href="#sign-in">sign-in</a><span>, in § 2.1</span>
    <li><a href="#dom-identityprovidericon-size">size</a><span>, in § 3.2</span>
    <li><a href="#state-machine-map">state machine map</a><span>, in § 2.1</span>
@@ -3123,52 +3129,53 @@ preventing token reuse(see Mozilla’s <a href="https://wiki.mozilla.org/Identit
   <aside class="dfn-panel" data-for="term-for-dictdef-credentialrequestoptions">
    <a href="https://w3c.github.io/webappsec-credential-management/#dictdef-credentialrequestoptions">https://w3c.github.io/webappsec-credential-management/#dictdef-credentialrequestoptions</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dictdef-credentialrequestoptions">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dictdef-credentialrequestoptions①">(2)</a> <a href="#ref-for-dictdef-credentialrequestoptions②">(3)</a>
+    <li><a href="#ref-for-dictdef-credentialrequestoptions">2.2.1. The CredentialRequestOptions ## {#browser-api-credential-request-options}</a> <a href="#ref-for-dictdef-credentialrequestoptions①">(2)</a>
+    <li><a href="#ref-for-dictdef-credentialrequestoptions②">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-credentialscontainer">
    <a href="https://w3c.github.io/webappsec-credential-management/#credentialscontainer">https://w3c.github.io/webappsec-credential-management/#credentialscontainer</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-credentialscontainer">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-credentialscontainer">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
     <li><a href="#ref-for-credentialscontainer①">4. Permissions Policy Integration</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-abstract-opdef-request-a-credential">
    <a href="https://w3c.github.io/webappsec-credential-management/#abstract-opdef-request-a-credential">https://w3c.github.io/webappsec-credential-management/#abstract-opdef-request-a-credential</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-abstract-opdef-request-a-credential">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-abstract-opdef-request-a-credential">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
     <li><a href="#ref-for-abstract-opdef-request-a-credential①">4. Permissions Policy Integration</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-dom-credential-discoverfromexternalsource-slot">
    <a href="https://w3c.github.io/webappsec-credential-management/#dom-credential-discoverfromexternalsource-slot">https://w3c.github.io/webappsec-credential-management/#dom-credential-discoverfromexternalsource-slot</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-credential-discoverfromexternalsource-slot">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dom-credential-discoverfromexternalsource-slot①">(2)</a>
+    <li><a href="#ref-for-dom-credential-discoverfromexternalsource-slot">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-dom-credential-discoverfromexternalsource-slot①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-dom-credentialscontainer-get">
    <a href="https://w3c.github.io/webappsec-credential-management/#dom-credentialscontainer-get">https://w3c.github.io/webappsec-credential-management/#dom-credentialscontainer-get</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-credentialscontainer-get">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-dom-credentialscontainer-get">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
     <li><a href="#ref-for-dom-credentialscontainer-get①">4. Permissions Policy Integration</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-dom-credentialrequestoptions-mediation">
    <a href="https://w3c.github.io/webappsec-credential-management/#dom-credentialrequestoptions-mediation">https://w3c.github.io/webappsec-credential-management/#dom-credentialrequestoptions-mediation</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-credentialrequestoptions-mediation">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-dom-credentialrequestoptions-mediation">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-same-origin-with-its-ancestors">
    <a href="https://w3c.github.io/webappsec-credential-management/#same-origin-with-its-ancestors">https://w3c.github.io/webappsec-credential-management/#same-origin-with-its-ancestors</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-same-origin-with-its-ancestors">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-same-origin-with-its-ancestors">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-dom-credentialrequestoptions-signal">
    <a href="https://w3c.github.io/webappsec-credential-management/#dom-credentialrequestoptions-signal">https://w3c.github.io/webappsec-credential-management/#dom-credentialrequestoptions-signal</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-credentialrequestoptions-signal">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-dom-credentialrequestoptions-signal">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-typedef-color">
@@ -3216,50 +3223,50 @@ preventing token reuse(see Mozilla’s <a href="https://wiki.mozilla.org/Identit
   <aside class="dfn-panel" data-for="term-for-sec-ordinary-object-internal-methods-and-internal-slots">
    <a href="https://tc39.github.io/ecma262/#sec-ordinary-object-internal-methods-and-internal-slots">https://tc39.github.io/ecma262/#sec-ordinary-object-internal-methods-and-internal-slots</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-sec-ordinary-object-internal-methods-and-internal-slots">2.2. The IdentityCredential Interface</a> <a href="#ref-for-sec-ordinary-object-internal-methods-and-internal-slots①">(2)</a>
+    <li><a href="#ref-for-sec-ordinary-object-internal-methods-and-internal-slots">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-sec-ordinary-object-internal-methods-and-internal-slots①">(2)</a>
     <li><a href="#ref-for-sec-ordinary-object-internal-methods-and-internal-slots②">4. Permissions Policy Integration</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-utf-8-encode">
    <a href="https://encoding.spec.whatwg.org/#utf-8-encode">https://encoding.spec.whatwg.org/#utf-8-encode</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-utf-8-encode">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-utf-8-encode">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-request-body">
    <a href="https://fetch.spec.whatwg.org/#concept-request-body">https://fetch.spec.whatwg.org/#concept-request-body</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-request-body">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-concept-request-body">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-request-client">
    <a href="https://fetch.spec.whatwg.org/#concept-request-client">https://fetch.spec.whatwg.org/#concept-request-client</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-request-client">2.2. The IdentityCredential Interface</a> <a href="#ref-for-concept-request-client①">(2)</a> <a href="#ref-for-concept-request-client②">(3)</a> <a href="#ref-for-concept-request-client③">(4)</a> <a href="#ref-for-concept-request-client④">(5)</a> <a href="#ref-for-concept-request-client⑤">(6)</a>
+    <li><a href="#ref-for-concept-request-client">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-concept-request-client①">(2)</a> <a href="#ref-for-concept-request-client②">(3)</a> <a href="#ref-for-concept-request-client③">(4)</a> <a href="#ref-for-concept-request-client④">(5)</a> <a href="#ref-for-concept-request-client⑤">(6)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-request-credentials-mode">
    <a href="https://fetch.spec.whatwg.org/#concept-request-credentials-mode">https://fetch.spec.whatwg.org/#concept-request-credentials-mode</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-request-credentials-mode">2.2. The IdentityCredential Interface</a> <a href="#ref-for-concept-request-credentials-mode①">(2)</a> <a href="#ref-for-concept-request-credentials-mode②">(3)</a> <a href="#ref-for-concept-request-credentials-mode③">(4)</a> <a href="#ref-for-concept-request-credentials-mode④">(5)</a> <a href="#ref-for-concept-request-credentials-mode⑤">(6)</a>
+    <li><a href="#ref-for-concept-request-credentials-mode">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-concept-request-credentials-mode①">(2)</a> <a href="#ref-for-concept-request-credentials-mode②">(3)</a> <a href="#ref-for-concept-request-credentials-mode③">(4)</a> <a href="#ref-for-concept-request-credentials-mode④">(5)</a> <a href="#ref-for-concept-request-credentials-mode⑤">(6)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-request-destination">
    <a href="https://fetch.spec.whatwg.org/#concept-request-destination">https://fetch.spec.whatwg.org/#concept-request-destination</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-request-destination">2.2. The IdentityCredential Interface</a> <a href="#ref-for-concept-request-destination①">(2)</a> <a href="#ref-for-concept-request-destination②">(3)</a> <a href="#ref-for-concept-request-destination③">(4)</a> <a href="#ref-for-concept-request-destination④">(5)</a> <a href="#ref-for-concept-request-destination⑤">(6)</a>
+    <li><a href="#ref-for-concept-request-destination">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-concept-request-destination①">(2)</a> <a href="#ref-for-concept-request-destination②">(3)</a> <a href="#ref-for-concept-request-destination③">(4)</a> <a href="#ref-for-concept-request-destination④">(5)</a> <a href="#ref-for-concept-request-destination⑤">(6)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-header-extract-mime-type">
    <a href="https://fetch.spec.whatwg.org/#concept-header-extract-mime-type">https://fetch.spec.whatwg.org/#concept-header-extract-mime-type</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-header-extract-mime-type">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-concept-header-extract-mime-type">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-fetch">
    <a href="https://fetch.spec.whatwg.org/#concept-fetch">https://fetch.spec.whatwg.org/#concept-fetch</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-fetch">2.2. The IdentityCredential Interface</a> <a href="#ref-for-concept-fetch①">(2)</a>
+    <li><a href="#ref-for-concept-fetch">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-concept-fetch①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-forbidden-request-header">
@@ -3271,43 +3278,43 @@ preventing token reuse(see Mozilla’s <a href="https://wiki.mozilla.org/Identit
   <aside class="dfn-panel" data-for="term-for-concept-header">
    <a href="https://fetch.spec.whatwg.org/#concept-header">https://fetch.spec.whatwg.org/#concept-header</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-header">2.2. The IdentityCredential Interface</a> <a href="#ref-for-concept-header①">(2)</a> <a href="#ref-for-concept-header②">(3)</a> <a href="#ref-for-concept-header③">(4)</a> <a href="#ref-for-concept-header④">(5)</a>
+    <li><a href="#ref-for-concept-header">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-concept-header①">(2)</a> <a href="#ref-for-concept-header②">(3)</a> <a href="#ref-for-concept-header③">(4)</a> <a href="#ref-for-concept-header④">(5)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-request-header-list">
    <a href="https://fetch.spec.whatwg.org/#concept-request-header-list">https://fetch.spec.whatwg.org/#concept-request-header-list</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-request-header-list">2.2. The IdentityCredential Interface</a> <a href="#ref-for-concept-request-header-list①">(2)</a> <a href="#ref-for-concept-request-header-list②">(3)</a> <a href="#ref-for-concept-request-header-list③">(4)</a> <a href="#ref-for-concept-request-header-list④">(5)</a>
+    <li><a href="#ref-for-concept-request-header-list">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-concept-request-header-list①">(2)</a> <a href="#ref-for-concept-request-header-list②">(3)</a> <a href="#ref-for-concept-request-header-list③">(4)</a> <a href="#ref-for-concept-request-header-list④">(5)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-response-header-list">
    <a href="https://fetch.spec.whatwg.org/#concept-response-header-list">https://fetch.spec.whatwg.org/#concept-response-header-list</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-response-header-list">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-concept-response-header-list">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-request-mode">
    <a href="https://fetch.spec.whatwg.org/#concept-request-mode">https://fetch.spec.whatwg.org/#concept-request-mode</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-request-mode">2.2. The IdentityCredential Interface</a> <a href="#ref-for-concept-request-mode①">(2)</a>
+    <li><a href="#ref-for-concept-request-mode">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-concept-request-mode①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-header-name">
    <a href="https://fetch.spec.whatwg.org/#concept-header-name">https://fetch.spec.whatwg.org/#concept-header-name</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-header-name">2.2. The IdentityCredential Interface</a> <a href="#ref-for-concept-header-name①">(2)</a> <a href="#ref-for-concept-header-name②">(3)</a> <a href="#ref-for-concept-header-name③">(4)</a> <a href="#ref-for-concept-header-name④">(5)</a>
+    <li><a href="#ref-for-concept-header-name">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-concept-header-name①">(2)</a> <a href="#ref-for-concept-header-name②">(3)</a> <a href="#ref-for-concept-header-name③">(4)</a> <a href="#ref-for-concept-header-name④">(5)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-network-error">
    <a href="https://fetch.spec.whatwg.org/#concept-network-error">https://fetch.spec.whatwg.org/#concept-network-error</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-network-error">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-concept-network-error">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-ok-status">
    <a href="https://fetch.spec.whatwg.org/#ok-status">https://fetch.spec.whatwg.org/#ok-status</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-ok-status">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-ok-status">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-http-origin">
@@ -3323,67 +3330,67 @@ preventing token reuse(see Mozilla’s <a href="https://wiki.mozilla.org/Identit
   <aside class="dfn-panel" data-for="term-for-concept-request-origin">
    <a href="https://fetch.spec.whatwg.org/#concept-request-origin">https://fetch.spec.whatwg.org/#concept-request-origin</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-request-origin">2.2. The IdentityCredential Interface</a> <a href="#ref-for-concept-request-origin①">(2)</a> <a href="#ref-for-concept-request-origin②">(3)</a> <a href="#ref-for-concept-request-origin③">(4)</a> <a href="#ref-for-concept-request-origin④">(5)</a> <a href="#ref-for-concept-request-origin⑤">(6)</a>
+    <li><a href="#ref-for-concept-request-origin">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-concept-request-origin①">(2)</a> <a href="#ref-for-concept-request-origin②">(3)</a> <a href="#ref-for-concept-request-origin③">(4)</a> <a href="#ref-for-concept-request-origin④">(5)</a> <a href="#ref-for-concept-request-origin⑤">(6)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-process-response-end-of-body">
    <a href="https://fetch.spec.whatwg.org/#process-response-end-of-body">https://fetch.spec.whatwg.org/#process-response-end-of-body</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-process-response-end-of-body">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-process-response-end-of-body">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-request-redirect-mode">
    <a href="https://fetch.spec.whatwg.org/#concept-request-redirect-mode">https://fetch.spec.whatwg.org/#concept-request-redirect-mode</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-request-redirect-mode">2.2. The IdentityCredential Interface</a> <a href="#ref-for-concept-request-redirect-mode①">(2)</a> <a href="#ref-for-concept-request-redirect-mode②">(3)</a> <a href="#ref-for-concept-request-redirect-mode③">(4)</a>
+    <li><a href="#ref-for-concept-request-redirect-mode">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-concept-request-redirect-mode①">(2)</a> <a href="#ref-for-concept-request-redirect-mode②">(3)</a> <a href="#ref-for-concept-request-redirect-mode③">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-request-referrer-policy">
    <a href="https://fetch.spec.whatwg.org/#concept-request-referrer-policy">https://fetch.spec.whatwg.org/#concept-request-referrer-policy</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-request-referrer-policy">2.2. The IdentityCredential Interface</a> <a href="#ref-for-concept-request-referrer-policy①">(2)</a> <a href="#ref-for-concept-request-referrer-policy②">(3)</a> <a href="#ref-for-concept-request-referrer-policy③">(4)</a>
+    <li><a href="#ref-for-concept-request-referrer-policy">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-concept-request-referrer-policy①">(2)</a> <a href="#ref-for-concept-request-referrer-policy②">(3)</a> <a href="#ref-for-concept-request-referrer-policy③">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-request">
    <a href="https://fetch.spec.whatwg.org/#concept-request">https://fetch.spec.whatwg.org/#concept-request</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-request">2.2. The IdentityCredential Interface</a> <a href="#ref-for-concept-request①">(2)</a> <a href="#ref-for-concept-request②">(3)</a> <a href="#ref-for-concept-request③">(4)</a> <a href="#ref-for-concept-request④">(5)</a> <a href="#ref-for-concept-request⑤">(6)</a> <a href="#ref-for-concept-request⑥">(7)</a> <a href="#ref-for-concept-request⑦">(8)</a>
+    <li><a href="#ref-for-concept-request">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-concept-request①">(2)</a> <a href="#ref-for-concept-request②">(3)</a> <a href="#ref-for-concept-request③">(4)</a> <a href="#ref-for-concept-request④">(5)</a> <a href="#ref-for-concept-request⑤">(6)</a> <a href="#ref-for-concept-request⑥">(7)</a> <a href="#ref-for-concept-request⑦">(8)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-response">
    <a href="https://fetch.spec.whatwg.org/#concept-response">https://fetch.spec.whatwg.org/#concept-response</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-response">2.2. The IdentityCredential Interface</a> <a href="#ref-for-concept-response①">(2)</a> <a href="#ref-for-concept-response②">(3)</a> <a href="#ref-for-concept-response③">(4)</a> <a href="#ref-for-concept-response④">(5)</a> <a href="#ref-for-concept-response⑤">(6)</a>
+    <li><a href="#ref-for-concept-response">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-concept-response①">(2)</a> <a href="#ref-for-concept-response②">(3)</a> <a href="#ref-for-concept-response③">(4)</a> <a href="#ref-for-concept-response④">(5)</a> <a href="#ref-for-concept-response⑤">(6)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-request-service-workers-mode">
    <a href="https://fetch.spec.whatwg.org/#request-service-workers-mode">https://fetch.spec.whatwg.org/#request-service-workers-mode</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-request-service-workers-mode">2.2. The IdentityCredential Interface</a> <a href="#ref-for-request-service-workers-mode①">(2)</a> <a href="#ref-for-request-service-workers-mode②">(3)</a> <a href="#ref-for-request-service-workers-mode③">(4)</a> <a href="#ref-for-request-service-workers-mode④">(5)</a> <a href="#ref-for-request-service-workers-mode⑤">(6)</a>
+    <li><a href="#ref-for-request-service-workers-mode">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-request-service-workers-mode①">(2)</a> <a href="#ref-for-request-service-workers-mode②">(3)</a> <a href="#ref-for-request-service-workers-mode③">(4)</a> <a href="#ref-for-request-service-workers-mode④">(5)</a> <a href="#ref-for-request-service-workers-mode⑤">(6)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-response-status">
    <a href="https://fetch.spec.whatwg.org/#concept-response-status">https://fetch.spec.whatwg.org/#concept-response-status</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-response-status">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-concept-response-status">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-request-url">
    <a href="https://fetch.spec.whatwg.org/#concept-request-url">https://fetch.spec.whatwg.org/#concept-request-url</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-request-url">2.2. The IdentityCredential Interface</a> <a href="#ref-for-concept-request-url①">(2)</a> <a href="#ref-for-concept-request-url②">(3)</a> <a href="#ref-for-concept-request-url③">(4)</a> <a href="#ref-for-concept-request-url④">(5)</a> <a href="#ref-for-concept-request-url⑤">(6)</a>
+    <li><a href="#ref-for-concept-request-url">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-concept-request-url①">(2)</a> <a href="#ref-for-concept-request-url②">(3)</a> <a href="#ref-for-concept-request-url③">(4)</a> <a href="#ref-for-concept-request-url④">(5)</a> <a href="#ref-for-concept-request-url⑤">(6)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-header-value">
    <a href="https://fetch.spec.whatwg.org/#concept-header-value">https://fetch.spec.whatwg.org/#concept-header-value</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-header-value">2.2. The IdentityCredential Interface</a> <a href="#ref-for-concept-header-value①">(2)</a> <a href="#ref-for-concept-header-value②">(3)</a> <a href="#ref-for-concept-header-value③">(4)</a> <a href="#ref-for-concept-header-value④">(5)</a>
+    <li><a href="#ref-for-concept-header-value">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-concept-header-value①">(2)</a> <a href="#ref-for-concept-header-value②">(3)</a> <a href="#ref-for-concept-header-value③">(4)</a> <a href="#ref-for-concept-header-value④">(5)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-request-window">
    <a href="https://fetch.spec.whatwg.org/#concept-request-window">https://fetch.spec.whatwg.org/#concept-request-window</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-request-window">2.2. The IdentityCredential Interface</a> <a href="#ref-for-concept-request-window①">(2)</a> <a href="#ref-for-concept-request-window②">(3)</a> <a href="#ref-for-concept-request-window③">(4)</a> <a href="#ref-for-concept-request-window④">(5)</a> <a href="#ref-for-concept-request-window⑤">(6)</a>
+    <li><a href="#ref-for-concept-request-window">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-concept-request-window①">(2)</a> <a href="#ref-for-concept-request-window②">(3)</a> <a href="#ref-for-concept-request-window③">(4)</a> <a href="#ref-for-concept-request-window④">(5)</a> <a href="#ref-for-concept-request-window⑤">(6)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-http-headerdef-sec-fetch-dest">
@@ -3418,100 +3425,100 @@ preventing token reuse(see Mozilla’s <a href="https://wiki.mozilla.org/Identit
   <aside class="dfn-panel" data-for="term-for-dom-manipulation-task-source">
    <a href="https://html.spec.whatwg.org/multipage/webappapis.html#dom-manipulation-task-source">https://html.spec.whatwg.org/multipage/webappapis.html#dom-manipulation-task-source</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-manipulation-task-source">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dom-manipulation-task-source①">(2)</a>
+    <li><a href="#ref-for-dom-manipulation-task-source">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-dom-manipulation-task-source①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-environment-settings-object">
    <a href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object">https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-environment-settings-object">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-environment-settings-object">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-in-parallel">
    <a href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel">https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-in-parallel">2.2. The IdentityCredential Interface</a> <a href="#ref-for-in-parallel①">(2)</a> <a href="#ref-for-in-parallel②">(3)</a> <a href="#ref-for-in-parallel③">(4)</a> <a href="#ref-for-in-parallel④">(5)</a>
+    <li><a href="#ref-for-in-parallel">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-in-parallel①">(2)</a> <a href="#ref-for-in-parallel②">(3)</a> <a href="#ref-for-in-parallel③">(4)</a> <a href="#ref-for-in-parallel④">(5)</a>
     <li><a href="#ref-for-in-parallel⑤">4. Permissions Policy Integration</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-networking-task-source">
    <a href="https://html.spec.whatwg.org/multipage/webappapis.html#networking-task-source">https://html.spec.whatwg.org/multipage/webappapis.html#networking-task-source</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-networking-task-source">2.2. The IdentityCredential Interface</a> <a href="#ref-for-networking-task-source①">(2)</a>
+    <li><a href="#ref-for-networking-task-source">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-networking-task-source①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-origin-opaque">
    <a href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin-opaque">https://html.spec.whatwg.org/multipage/browsers.html#concept-origin-opaque</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-origin-opaque">2.2. The IdentityCredential Interface</a> <a href="#ref-for-concept-origin-opaque①">(2)</a> <a href="#ref-for-concept-origin-opaque②">(3)</a> <a href="#ref-for-concept-origin-opaque③">(4)</a>
+    <li><a href="#ref-for-concept-origin-opaque">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-concept-origin-opaque①">(2)</a> <a href="#ref-for-concept-origin-opaque②">(3)</a> <a href="#ref-for-concept-origin-opaque③">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-origin">
    <a href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin">https://html.spec.whatwg.org/multipage/browsers.html#concept-origin</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-concept-origin">2.1. The State Machine</a> <a href="#ref-for-concept-origin①">(2)</a> <a href="#ref-for-concept-origin②">(3)</a>
-    <li><a href="#ref-for-concept-origin③">2.2. The IdentityCredential Interface</a> <a href="#ref-for-concept-origin④">(2)</a>
+    <li><a href="#ref-for-concept-origin③">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-concept-origin④">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-settings-object-origin">
    <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin">https://html.spec.whatwg.org/multipage/webappapis.html#concept-settings-object-origin</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-settings-object-origin">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-concept-settings-object-origin">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-document-permissions-policy">
    <a href="https://html.spec.whatwg.org/multipage/dom.html#concept-document-permissions-policy">https://html.spec.whatwg.org/multipage/dom.html#concept-document-permissions-policy</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-document-permissions-policy">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-concept-document-permissions-policy">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
     <li><a href="#ref-for-concept-document-permissions-policy①">4. Permissions Policy Integration</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-queue-a-global-task">
    <a href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-global-task">https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-global-task</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-queue-a-global-task">2.2. The IdentityCredential Interface</a> <a href="#ref-for-queue-a-global-task①">(2)</a> <a href="#ref-for-queue-a-global-task②">(3)</a>
+    <li><a href="#ref-for-queue-a-global-task">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-queue-a-global-task①">(2)</a> <a href="#ref-for-queue-a-global-task②">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-global-object-realm">
    <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-global-object-realm">https://html.spec.whatwg.org/multipage/webappapis.html#concept-global-object-realm</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-global-object-realm">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-concept-global-object-realm">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-relevant-settings-object">
    <a href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-relevant-settings-object">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-relevant-settings-object">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-same-origin">
    <a href="https://html.spec.whatwg.org/multipage/browsers.html#same-origin">https://html.spec.whatwg.org/multipage/browsers.html#same-origin</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-same-origin">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-same-origin">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-dom-settimeout">
    <a href="https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#dom-settimeout">https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#dom-settimeout</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-settimeout">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dom-settimeout①">(2)</a>
+    <li><a href="#ref-for-dom-settimeout">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-dom-settimeout①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-task">
    <a href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-task">https://html.spec.whatwg.org/multipage/webappapis.html#concept-task</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-task">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-concept-task">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-map-exists">
    <a href="https://infra.spec.whatwg.org/#map-exists">https://infra.spec.whatwg.org/#map-exists</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-map-exists">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-map-exists">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-string-is">
    <a href="https://infra.spec.whatwg.org/#string-is">https://infra.spec.whatwg.org/#string-is</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-string-is">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-string-is">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-map-getting-the-keys">
@@ -3523,39 +3530,39 @@ preventing token reuse(see Mozilla’s <a href="https://wiki.mozilla.org/Identit
   <aside class="dfn-panel" data-for="term-for-list">
    <a href="https://infra.spec.whatwg.org/#list">https://infra.spec.whatwg.org/#list</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-list">2.2. The IdentityCredential Interface</a> <a href="#ref-for-list①">(2)</a> <a href="#ref-for-list②">(3)</a> <a href="#ref-for-list③">(4)</a> <a href="#ref-for-list④">(5)</a> <a href="#ref-for-list⑤">(6)</a>
+    <li><a href="#ref-for-list">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-list①">(2)</a> <a href="#ref-for-list②">(3)</a> <a href="#ref-for-list③">(4)</a> <a href="#ref-for-list④">(5)</a> <a href="#ref-for-list⑤">(6)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-ordered-map">
    <a href="https://infra.spec.whatwg.org/#ordered-map">https://infra.spec.whatwg.org/#ordered-map</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-ordered-map">2.1. The State Machine</a>
-    <li><a href="#ref-for-ordered-map①">2.2. The IdentityCredential Interface</a> <a href="#ref-for-ordered-map②">(2)</a>
+    <li><a href="#ref-for-ordered-map①">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-ordered-map②">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-ordered-map">
    <a href="https://infra.spec.whatwg.org/#ordered-map">https://infra.spec.whatwg.org/#ordered-map</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-ordered-map">2.1. The State Machine</a>
-    <li><a href="#ref-for-ordered-map①">2.2. The IdentityCredential Interface</a> <a href="#ref-for-ordered-map②">(2)</a>
+    <li><a href="#ref-for-ordered-map①">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-ordered-map②">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-parse-json-bytes-to-an-infra-value">
    <a href="https://infra.spec.whatwg.org/#parse-json-bytes-to-an-infra-value">https://infra.spec.whatwg.org/#parse-json-bytes-to-an-infra-value</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-parse-json-bytes-to-an-infra-value">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-parse-json-bytes-to-an-infra-value">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-list-size">
    <a href="https://infra.spec.whatwg.org/#list-size">https://infra.spec.whatwg.org/#list-size</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-list-size">2.2. The IdentityCredential Interface</a> <a href="#ref-for-list-size①">(2)</a> <a href="#ref-for-list-size②">(3)</a>
+    <li><a href="#ref-for-list-size">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-list-size①">(2)</a> <a href="#ref-for-list-size②">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-string">
    <a href="https://infra.spec.whatwg.org/#string">https://infra.spec.whatwg.org/#string</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-string">2.2. The IdentityCredential Interface</a> <a href="#ref-for-string①">(2)</a>
+    <li><a href="#ref-for-string">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-string①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-user-agent">
@@ -3563,7 +3570,7 @@ preventing token reuse(see Mozilla’s <a href="https://wiki.mozilla.org/Identit
    <ul>
     <li><a href="#ref-for-user-agent">1. Introduction</a> <a href="#ref-for-user-agent①">(2)</a>
     <li><a href="#ref-for-user-agent②">2.1. The State Machine</a>
-    <li><a href="#ref-for-user-agent③">2.2. The IdentityCredential Interface</a> <a href="#ref-for-user-agent④">(2)</a> <a href="#ref-for-user-agent⑤">(3)</a>
+    <li><a href="#ref-for-user-agent③">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-user-agent④">(2)</a> <a href="#ref-for-user-agent⑤">(3)</a>
     <li><a href="#ref-for-user-agent⑥">3.2. Manifest</a> <a href="#ref-for-user-agent⑦">(2)</a> <a href="#ref-for-user-agent⑧">(3)</a> <a href="#ref-for-user-agent⑨">(4)</a> <a href="#ref-for-user-agent①⓪">(5)</a>
     <li><a href="#ref-for-user-agent①①">3.5. Identity Assertions</a>
     <li><a href="#ref-for-user-agent①②">6.1. Principals</a> <a href="#ref-for-user-agent①③">(2)</a> <a href="#ref-for-user-agent①④">(3)</a> <a href="#ref-for-user-agent①⑤">(4)</a> <a href="#ref-for-user-agent①⑥">(5)</a>
@@ -3581,7 +3588,7 @@ preventing token reuse(see Mozilla’s <a href="https://wiki.mozilla.org/Identit
   <aside class="dfn-panel" data-for="term-for-json-mime-type">
    <a href="https://mimesniff.spec.whatwg.org/#json-mime-type">https://mimesniff.spec.whatwg.org/#json-mime-type</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-json-mime-type">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-json-mime-type">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-policy-controlled-feature-default-allowlist">
@@ -3599,49 +3606,49 @@ preventing token reuse(see Mozilla’s <a href="https://wiki.mozilla.org/Identit
   <aside class="dfn-panel" data-for="term-for-potentially-trustworthy-url">
    <a href="https://w3c.github.io/webappsec-secure-contexts/#potentially-trustworthy-url">https://w3c.github.io/webappsec-secure-contexts/#potentially-trustworthy-url</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-potentially-trustworthy-url">2.2. The IdentityCredential Interface</a> <a href="#ref-for-potentially-trustworthy-url①">(2)</a> <a href="#ref-for-potentially-trustworthy-url②">(3)</a>
+    <li><a href="#ref-for-potentially-trustworthy-url">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-potentially-trustworthy-url①">(2)</a> <a href="#ref-for-potentially-trustworthy-url②">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-url-host">
    <a href="https://url.spec.whatwg.org/#concept-url-host">https://url.spec.whatwg.org/#concept-url-host</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-url-host">2.2. The IdentityCredential Interface</a> <a href="#ref-for-concept-url-host①">(2)</a>
+    <li><a href="#ref-for-concept-url-host">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-concept-url-host①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-url-path">
    <a href="https://url.spec.whatwg.org/#concept-url-path">https://url.spec.whatwg.org/#concept-url-path</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-url-path">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-concept-url-path">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-host-registrable-domain">
    <a href="https://url.spec.whatwg.org/#host-registrable-domain">https://url.spec.whatwg.org/#host-registrable-domain</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-host-registrable-domain">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-host-registrable-domain">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-url-scheme">
    <a href="https://url.spec.whatwg.org/#concept-url-scheme">https://url.spec.whatwg.org/#concept-url-scheme</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-url-scheme">2.2. The IdentityCredential Interface</a> <a href="#ref-for-concept-url-scheme①">(2)</a>
+    <li><a href="#ref-for-concept-url-scheme">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-concept-url-scheme①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-url">
    <a href="https://url.spec.whatwg.org/#concept-url">https://url.spec.whatwg.org/#concept-url</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-url">2.2. The IdentityCredential Interface</a> <a href="#ref-for-concept-url①">(2)</a> <a href="#ref-for-concept-url②">(3)</a>
+    <li><a href="#ref-for-concept-url">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-concept-url①">(2)</a> <a href="#ref-for-concept-url②">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-url-parser">
    <a href="https://url.spec.whatwg.org/#concept-url-parser">https://url.spec.whatwg.org/#concept-url-parser</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-url-parser">2.2. The IdentityCredential Interface</a> <a href="#ref-for-concept-url-parser①">(2)</a>
+    <li><a href="#ref-for-concept-url-parser">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-concept-url-parser①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-idl-DOMException">
    <a href="https://webidl.spec.whatwg.org/#idl-DOMException">https://webidl.spec.whatwg.org/#idl-DOMException</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-idl-DOMException">2.2. The IdentityCredential Interface</a> <a href="#ref-for-idl-DOMException①">(2)</a> <a href="#ref-for-idl-DOMException②">(3)</a> <a href="#ref-for-idl-DOMException③">(4)</a>
+    <li><a href="#ref-for-idl-DOMException">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-idl-DOMException①">(2)</a> <a href="#ref-for-idl-DOMException②">(3)</a> <a href="#ref-for-idl-DOMException③">(4)</a>
     <li><a href="#ref-for-idl-DOMException④">4. Permissions Policy Integration</a>
    </ul>
   </aside>
@@ -3654,7 +3661,7 @@ preventing token reuse(see Mozilla’s <a href="https://wiki.mozilla.org/Identit
   <aside class="dfn-panel" data-for="term-for-networkerror">
    <a href="https://webidl.spec.whatwg.org/#networkerror">https://webidl.spec.whatwg.org/#networkerror</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-networkerror">2.2. The IdentityCredential Interface</a> <a href="#ref-for-networkerror①">(2)</a> <a href="#ref-for-networkerror②">(3)</a> <a href="#ref-for-networkerror③">(4)</a> <a href="#ref-for-networkerror④">(5)</a>
+    <li><a href="#ref-for-networkerror">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-networkerror①">(2)</a> <a href="#ref-for-networkerror②">(3)</a> <a href="#ref-for-networkerror③">(4)</a> <a href="#ref-for-networkerror④">(5)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-notallowederror">
@@ -3672,7 +3679,9 @@ preventing token reuse(see Mozilla’s <a href="https://wiki.mozilla.org/Identit
   <aside class="dfn-panel" data-for="term-for-idl-USVString">
    <a href="https://webidl.spec.whatwg.org/#idl-USVString">https://webidl.spec.whatwg.org/#idl-USVString</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-idl-USVString">2.2. The IdentityCredential Interface</a> <a href="#ref-for-idl-USVString①">(2)</a> <a href="#ref-for-idl-USVString②">(3)</a> <a href="#ref-for-idl-USVString③">(4)</a> <a href="#ref-for-idl-USVString④">(5)</a> <a href="#ref-for-idl-USVString⑤">(6)</a> <a href="#ref-for-idl-USVString⑥">(7)</a> <a href="#ref-for-idl-USVString⑦">(8)</a> <a href="#ref-for-idl-USVString⑧">(9)</a> <a href="#ref-for-idl-USVString⑨">(10)</a> <a href="#ref-for-idl-USVString①⓪">(11)</a> <a href="#ref-for-idl-USVString①①">(12)</a> <a href="#ref-for-idl-USVString①②">(13)</a> <a href="#ref-for-idl-USVString①③">(14)</a> <a href="#ref-for-idl-USVString①④">(15)</a> <a href="#ref-for-idl-USVString①⑤">(16)</a> <a href="#ref-for-idl-USVString①⑥">(17)</a> <a href="#ref-for-idl-USVString①⑦">(18)</a> <a href="#ref-for-idl-USVString①⑧">(19)</a> <a href="#ref-for-idl-USVString①⑨">(20)</a> <a href="#ref-for-idl-USVString②⓪">(21)</a> <a href="#ref-for-idl-USVString②①">(22)</a>
+    <li><a href="#ref-for-idl-USVString">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-idl-USVString①">2.2.1. The CredentialRequestOptions ## {#browser-api-credential-request-options}</a> <a href="#ref-for-idl-USVString②">(2)</a> <a href="#ref-for-idl-USVString③">(3)</a>
+    <li><a href="#ref-for-idl-USVString④">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-idl-USVString⑤">(2)</a> <a href="#ref-for-idl-USVString⑥">(3)</a> <a href="#ref-for-idl-USVString⑦">(4)</a> <a href="#ref-for-idl-USVString⑧">(5)</a> <a href="#ref-for-idl-USVString⑨">(6)</a> <a href="#ref-for-idl-USVString①⓪">(7)</a> <a href="#ref-for-idl-USVString①①">(8)</a> <a href="#ref-for-idl-USVString①②">(9)</a> <a href="#ref-for-idl-USVString①③">(10)</a> <a href="#ref-for-idl-USVString①④">(11)</a> <a href="#ref-for-idl-USVString①⑤">(12)</a> <a href="#ref-for-idl-USVString①⑥">(13)</a> <a href="#ref-for-idl-USVString①⑦">(14)</a> <a href="#ref-for-idl-USVString①⑧">(15)</a> <a href="#ref-for-idl-USVString①⑨">(16)</a> <a href="#ref-for-idl-USVString②⓪">(17)</a> <a href="#ref-for-idl-USVString②①">(18)</a>
     <li><a href="#ref-for-idl-USVString②②">3.1. The Well-Known File</a>
     <li><a href="#ref-for-idl-USVString②③">3.2. Manifest</a> <a href="#ref-for-idl-USVString②④">(2)</a> <a href="#ref-for-idl-USVString②⑤">(3)</a> <a href="#ref-for-idl-USVString②⑥">(4)</a> <a href="#ref-for-idl-USVString②⑦">(5)</a> <a href="#ref-for-idl-USVString②⑧">(6)</a>
     <li><a href="#ref-for-idl-USVString②⑨">3.3. Accounts List</a> <a href="#ref-for-idl-USVString③⓪">(2)</a> <a href="#ref-for-idl-USVString③①">(3)</a> <a href="#ref-for-idl-USVString③②">(4)</a> <a href="#ref-for-idl-USVString③③">(5)</a> <a href="#ref-for-idl-USVString③④">(6)</a>
@@ -3689,7 +3698,7 @@ preventing token reuse(see Mozilla’s <a href="https://wiki.mozilla.org/Identit
   <aside class="dfn-panel" data-for="term-for-dfn-convert-ecmascript-to-idl-value">
    <a href="https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value">https://webidl.spec.whatwg.org/#dfn-convert-ecmascript-to-idl-value</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dfn-convert-ecmascript-to-idl-value">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dfn-convert-ecmascript-to-idl-value①">(2)</a> <a href="#ref-for-dfn-convert-ecmascript-to-idl-value②">(3)</a> <a href="#ref-for-dfn-convert-ecmascript-to-idl-value③">(4)</a> <a href="#ref-for-dfn-convert-ecmascript-to-idl-value④">(5)</a>
+    <li><a href="#ref-for-dfn-convert-ecmascript-to-idl-value">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-dfn-convert-ecmascript-to-idl-value①">(2)</a> <a href="#ref-for-dfn-convert-ecmascript-to-idl-value②">(3)</a> <a href="#ref-for-dfn-convert-ecmascript-to-idl-value③">(4)</a> <a href="#ref-for-dfn-convert-ecmascript-to-idl-value④">(5)</a>
     <li><a href="#ref-for-dfn-convert-ecmascript-to-idl-value⑤">3.2. Manifest</a>
     <li><a href="#ref-for-dfn-convert-ecmascript-to-idl-value⑥">3.3. Accounts List</a>
     <li><a href="#ref-for-dfn-convert-ecmascript-to-idl-value⑦">3.4. Client Metadata</a>
@@ -3699,13 +3708,14 @@ preventing token reuse(see Mozilla’s <a href="https://wiki.mozilla.org/Identit
   <aside class="dfn-panel" data-for="term-for-idl-sequence">
    <a href="https://webidl.spec.whatwg.org/#idl-sequence">https://webidl.spec.whatwg.org/#idl-sequence</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-idl-sequence">2.2. The IdentityCredential Interface</a> <a href="#ref-for-idl-sequence①">(2)</a> <a href="#ref-for-idl-sequence②">(3)</a> <a href="#ref-for-idl-sequence③">(4)</a> <a href="#ref-for-idl-sequence④">(5)</a>
+    <li><a href="#ref-for-idl-sequence">2.2.1. The CredentialRequestOptions ## {#browser-api-credential-request-options}</a>
+    <li><a href="#ref-for-idl-sequence①">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-idl-sequence②">(2)</a> <a href="#ref-for-idl-sequence③">(3)</a> <a href="#ref-for-idl-sequence④">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-idl-unsigned-long">
    <a href="https://webidl.spec.whatwg.org/#idl-unsigned-long">https://webidl.spec.whatwg.org/#idl-unsigned-long</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-idl-unsigned-long">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-idl-unsigned-long">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
     <li><a href="#ref-for-idl-unsigned-long①">3.2. Manifest</a>
    </ul>
   </aside>
@@ -3970,7 +3980,6 @@ preventing token reuse(see Mozilla’s <a href="https://wiki.mozilla.org/Identit
   <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="USVString " href="#dom-identityprovideraccount-picture"><c- g>picture</c-></a>;
   <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#idl-sequence"><c- b>sequence</c-></a>&lt;<a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-USVString"><c- b>USVString</c-></a>> <a class="idl-code" data-link-type="dict-member" data-type="sequence<USVString> " href="#dom-identityprovideraccount-approved_clients"><c- g>approved_clients</c-></a>;
 };
-
 <c- b>dictionary</c-> <a href="#dictdef-identityprovideraccountlist"><code><c- g>IdentityProviderAccountList</c-></code></a> {
   <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#idl-sequence"><c- b>sequence</c-></a>&lt;<a data-link-type="idl-name" href="#dictdef-identityprovideraccount"><c- n>IdentityProviderAccount</c-></a>> <a data-type="sequence<IdentityProviderAccount> " href="#dom-identityprovideraccountlist-accounts"><code><c- g>accounts</c-></code></a>;
 };
@@ -3997,7 +4006,6 @@ provider_urls array. <a class="issue-return" href="#issue-80d5b61c" title="Jump 
 user’s identities before the user grants permission. This is an active area of investigation
 that is being explored <a href="https://github.com/fedidcg/FedCM/issues/230#issuecomment-1089040953">here</a>. <a class="issue-return" href="#issue-77971f6b" title="Jump to section">↵</a></div>
    <div class="issue"> We should validate the accounts list returned here for repeated ids, as described <a href="https://github.com/fedidcg/FedCM/issues/336">here</a>. <a class="issue-return" href="#issue-db10ab61" title="Jump to section">↵</a></div>
-   <div class="issue"> Displaying an account chooser displaying all of the provided options should not be included normatively <a class="issue-return" href="#issue-96c0c7c6" title="Jump to section">↵</a></div>
    <div class="issue"> <a href="https://github.com/fedidcg/FedCM/issues/218">Clarify</a> the IDP API response when the user is not signed in. <a class="issue-return" href="#issue-ef9f6ef5" title="Jump to section">↵</a></div>
   </div>
   <aside class="dfn-panel" data-for="rp">
@@ -4006,7 +4014,8 @@ that is being explored <a href="https://github.com/fedidcg/FedCM/issues/230#issu
     <li><a href="#ref-for-rp">1. Introduction</a> <a href="#ref-for-rp①">(2)</a> <a href="#ref-for-rp②">(3)</a>
     <li><a href="#ref-for-rp③">2. The Browser API</a> <a href="#ref-for-rp④">(2)</a> <a href="#ref-for-rp⑤">(3)</a> <a href="#ref-for-rp⑥">(4)</a>
     <li><a href="#ref-for-rp⑦">2.1. The State Machine</a> <a href="#ref-for-rp⑧">(2)</a> <a href="#ref-for-rp⑨">(3)</a>
-    <li><a href="#ref-for-rp①⓪">2.2. The IdentityCredential Interface</a> <a href="#ref-for-rp①①">(2)</a> <a href="#ref-for-rp①②">(3)</a> <a href="#ref-for-rp①③">(4)</a> <a href="#ref-for-rp①④">(5)</a> <a href="#ref-for-rp①⑤">(6)</a> <a href="#ref-for-rp①⑥">(7)</a> <a href="#ref-for-rp①⑦">(8)</a>
+    <li><a href="#ref-for-rp①⓪">2.2.1. The CredentialRequestOptions ## {#browser-api-credential-request-options}</a> <a href="#ref-for-rp①①">(2)</a> <a href="#ref-for-rp①②">(3)</a> <a href="#ref-for-rp①③">(4)</a>
+    <li><a href="#ref-for-rp①④">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-rp①⑤">(2)</a> <a href="#ref-for-rp①⑥">(3)</a> <a href="#ref-for-rp①⑦">(4)</a>
     <li><a href="#ref-for-rp①⑧">3.1. The Well-Known File</a>
     <li><a href="#ref-for-rp①⑨">3.2. Manifest</a>
     <li><a href="#ref-for-rp②⓪">3.3. Accounts List</a> <a href="#ref-for-rp②①">(2)</a>
@@ -4031,7 +4040,9 @@ that is being explored <a href="https://github.com/fedidcg/FedCM/issues/230#issu
     <li><a href="#ref-for-idp">1. Introduction</a> <a href="#ref-for-idp①">(2)</a> <a href="#ref-for-idp②">(3)</a> <a href="#ref-for-idp③">(4)</a> <a href="#ref-for-idp④">(5)</a>
     <li><a href="#ref-for-idp⑤">2. The Browser API</a> <a href="#ref-for-idp⑥">(2)</a> <a href="#ref-for-idp⑦">(3)</a>
     <li><a href="#ref-for-idp⑧">2.1. The State Machine</a> <a href="#ref-for-idp⑨">(2)</a>
-    <li><a href="#ref-for-idp①⓪">2.2. The IdentityCredential Interface</a> <a href="#ref-for-idp①①">(2)</a> <a href="#ref-for-idp①②">(3)</a> <a href="#ref-for-idp①③">(4)</a> <a href="#ref-for-idp①④">(5)</a> <a href="#ref-for-idp①⑤">(6)</a> <a href="#ref-for-idp①⑥">(7)</a> <a href="#ref-for-idp①⑦">(8)</a> <a href="#ref-for-idp①⑧">(9)</a> <a href="#ref-for-idp①⑨">(10)</a>
+    <li><a href="#ref-for-idp①⓪">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-idp①①">2.2.1. The CredentialRequestOptions ## {#browser-api-credential-request-options}</a> <a href="#ref-for-idp①②">(2)</a>
+    <li><a href="#ref-for-idp①③">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-idp①④">(2)</a> <a href="#ref-for-idp①⑤">(3)</a> <a href="#ref-for-idp①⑥">(4)</a> <a href="#ref-for-idp①⑦">(5)</a> <a href="#ref-for-idp①⑧">(6)</a> <a href="#ref-for-idp①⑨">(7)</a>
     <li><a href="#ref-for-idp②⓪">3. Identity Provider HTTP API</a> <a href="#ref-for-idp②①">(2)</a>
     <li><a href="#ref-for-idp②②">3.1. The Well-Known File</a> <a href="#ref-for-idp②③">(2)</a>
     <li><a href="#ref-for-idp②④">3.2. Manifest</a> <a href="#ref-for-idp②⑤">(2)</a> <a href="#ref-for-idp②⑥">(3)</a> <a href="#ref-for-idp②⑦">(4)</a>
@@ -4061,46 +4072,46 @@ that is being explored <a href="https://github.com/fedidcg/FedCM/issues/230#issu
    <b><a href="#accountstate">#accountstate</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-accountstate">2.1. The State Machine</a> <a href="#ref-for-accountstate①">(2)</a> <a href="#ref-for-accountstate②">(3)</a>
-    <li><a href="#ref-for-accountstate③">2.2. The IdentityCredential Interface</a> <a href="#ref-for-accountstate④">(2)</a>
+    <li><a href="#ref-for-accountstate③">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-accountstate④">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-accountstate-registration-state">
    <b><a href="#dom-accountstate-registration-state">#dom-accountstate-registration-state</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-accountstate-registration-state">2.1. The State Machine</a>
-    <li><a href="#ref-for-dom-accountstate-registration-state①">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dom-accountstate-registration-state②">(2)</a> <a href="#ref-for-dom-accountstate-registration-state③">(3)</a> <a href="#ref-for-dom-accountstate-registration-state④">(4)</a> <a href="#ref-for-dom-accountstate-registration-state⑤">(5)</a>
+    <li><a href="#ref-for-dom-accountstate-registration-state①">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-dom-accountstate-registration-state②">(2)</a> <a href="#ref-for-dom-accountstate-registration-state③">(3)</a> <a href="#ref-for-dom-accountstate-registration-state④">(4)</a> <a href="#ref-for-dom-accountstate-registration-state⑤">(5)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-accountstate-registered">
    <b><a href="#dom-accountstate-registered">#dom-accountstate-registered</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-accountstate-registered">2.1. The State Machine</a>
-    <li><a href="#ref-for-dom-accountstate-registered①">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dom-accountstate-registered②">(2)</a>
+    <li><a href="#ref-for-dom-accountstate-registered①">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-dom-accountstate-registered②">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-accountstate-unregistered">
    <b><a href="#dom-accountstate-unregistered">#dom-accountstate-unregistered</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-accountstate-unregistered">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dom-accountstate-unregistered①">(2)</a> <a href="#ref-for-dom-accountstate-unregistered②">(3)</a> <a href="#ref-for-dom-accountstate-unregistered③">(4)</a>
+    <li><a href="#ref-for-dom-accountstate-unregistered">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-dom-accountstate-unregistered①">(2)</a> <a href="#ref-for-dom-accountstate-unregistered②">(3)</a> <a href="#ref-for-dom-accountstate-unregistered③">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-accountstate-allows-logout">
    <b><a href="#dom-accountstate-allows-logout">#dom-accountstate-allows-logout</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-accountstate-allows-logout">2.1. The State Machine</a>
-    <li><a href="#ref-for-dom-accountstate-allows-logout①">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dom-accountstate-allows-logout②">(2)</a>
+    <li><a href="#ref-for-dom-accountstate-allows-logout①">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-dom-accountstate-allows-logout②">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="compute-account-state">
    <b><a href="#compute-account-state">#compute-account-state</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-compute-account-state">2.2. The IdentityCredential Interface</a> <a href="#ref-for-compute-account-state①">(2)</a>
+    <li><a href="#ref-for-compute-account-state">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-compute-account-state①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="sign-in">
    <b><a href="#sign-in">#sign-in</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-sign-in">2.2. The IdentityCredential Interface</a> <a href="#ref-for-sign-in①">(2)</a> <a href="#ref-for-sign-in②">(3)</a>
+    <li><a href="#ref-for-sign-in">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-sign-in①">(2)</a> <a href="#ref-for-sign-in②">(3)</a>
     <li><a href="#ref-for-sign-in③">3.5. Identity Assertions</a>
    </ul>
   </aside>
@@ -4109,51 +4120,57 @@ that is being explored <a href="https://github.com/fedidcg/FedCM/issues/230#issu
    <ul>
     <li><a href="#ref-for-identitycredential">2. The Browser API</a>
     <li><a href="#ref-for-identitycredential①">2.1. The State Machine</a>
-    <li><a href="#ref-for-identitycredential②">2.2. The IdentityCredential Interface</a> <a href="#ref-for-identitycredential③">(2)</a> <a href="#ref-for-identitycredential④">(3)</a> <a href="#ref-for-identitycredential⑤">(4)</a> <a href="#ref-for-identitycredential⑥">(5)</a> <a href="#ref-for-identitycredential⑦">(6)</a> <a href="#ref-for-identitycredential⑧">(7)</a>
+    <li><a href="#ref-for-identitycredential②">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-identitycredential③">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-identitycredential④">(2)</a> <a href="#ref-for-identitycredential⑤">(3)</a> <a href="#ref-for-identitycredential⑥">(4)</a> <a href="#ref-for-identitycredential⑦">(5)</a> <a href="#ref-for-identitycredential⑧">(6)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-identitycredential-token">
    <b><a href="#dom-identitycredential-token">#dom-identitycredential-token</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-identitycredential-token">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dom-identitycredential-token①">(2)</a> <a href="#ref-for-dom-identitycredential-token②">(3)</a>
+    <li><a href="#ref-for-dom-identitycredential-token">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dom-identitycredential-token①">(2)</a>
+    <li><a href="#ref-for-dom-identitycredential-token②">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-credentialrequestoptions-identity">
    <b><a href="#dom-credentialrequestoptions-identity">#dom-credentialrequestoptions-identity</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-credentialrequestoptions-identity">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dom-credentialrequestoptions-identity①">(2)</a> <a href="#ref-for-dom-credentialrequestoptions-identity②">(3)</a> <a href="#ref-for-dom-credentialrequestoptions-identity③">(4)</a>
+    <li><a href="#ref-for-dom-credentialrequestoptions-identity">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-dom-credentialrequestoptions-identity①">(2)</a> <a href="#ref-for-dom-credentialrequestoptions-identity②">(3)</a> <a href="#ref-for-dom-credentialrequestoptions-identity③">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dictdef-identitycredentialrequestoptions">
    <b><a href="#dictdef-identitycredentialrequestoptions">#dictdef-identitycredentialrequestoptions</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dictdef-identitycredentialrequestoptions">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dictdef-identitycredentialrequestoptions①">(2)</a> <a href="#ref-for-dictdef-identitycredentialrequestoptions②">(3)</a>
+    <li><a href="#ref-for-dictdef-identitycredentialrequestoptions">2.2.1. The CredentialRequestOptions ## {#browser-api-credential-request-options}</a> <a href="#ref-for-dictdef-identitycredentialrequestoptions①">(2)</a>
+    <li><a href="#ref-for-dictdef-identitycredentialrequestoptions②">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-identitycredentialrequestoptions-providers">
    <b><a href="#dom-identitycredentialrequestoptions-providers">#dom-identitycredentialrequestoptions-providers</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-identitycredentialrequestoptions-providers">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dom-identitycredentialrequestoptions-providers①">(2)</a> <a href="#ref-for-dom-identitycredentialrequestoptions-providers②">(3)</a>
+    <li><a href="#ref-for-dom-identitycredentialrequestoptions-providers">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-dom-identitycredentialrequestoptions-providers①">(2)</a> <a href="#ref-for-dom-identitycredentialrequestoptions-providers②">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dictdef-identityproviderconfig">
    <b><a href="#dictdef-identityproviderconfig">#dictdef-identityproviderconfig</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dictdef-identityproviderconfig">2.1. The State Machine</a>
-    <li><a href="#ref-for-dictdef-identityproviderconfig①">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dictdef-identityproviderconfig②">(2)</a> <a href="#ref-for-dictdef-identityproviderconfig③">(3)</a> <a href="#ref-for-dictdef-identityproviderconfig④">(4)</a> <a href="#ref-for-dictdef-identityproviderconfig⑤">(5)</a> <a href="#ref-for-dictdef-identityproviderconfig⑥">(6)</a> <a href="#ref-for-dictdef-identityproviderconfig⑦">(7)</a> <a href="#ref-for-dictdef-identityproviderconfig⑧">(8)</a> <a href="#ref-for-dictdef-identityproviderconfig⑨">(9)</a> <a href="#ref-for-dictdef-identityproviderconfig①⓪">(10)</a>
+    <li><a href="#ref-for-dictdef-identityproviderconfig①">2.2.1. The CredentialRequestOptions ## {#browser-api-credential-request-options}</a> <a href="#ref-for-dictdef-identityproviderconfig②">(2)</a> <a href="#ref-for-dictdef-identityproviderconfig③">(3)</a>
+    <li><a href="#ref-for-dictdef-identityproviderconfig④">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-dictdef-identityproviderconfig⑤">(2)</a> <a href="#ref-for-dictdef-identityproviderconfig⑥">(3)</a> <a href="#ref-for-dictdef-identityproviderconfig⑦">(4)</a> <a href="#ref-for-dictdef-identityproviderconfig⑧">(5)</a> <a href="#ref-for-dictdef-identityproviderconfig⑨">(6)</a> <a href="#ref-for-dictdef-identityproviderconfig①⓪">(7)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-identityproviderconfig-configurl">
    <b><a href="#dom-identityproviderconfig-configurl">#dom-identityproviderconfig-configurl</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-identityproviderconfig-configurl">2.1. The State Machine</a>
-    <li><a href="#ref-for-dom-identityproviderconfig-configurl①">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dom-identityproviderconfig-configurl②">(2)</a> <a href="#ref-for-dom-identityproviderconfig-configurl③">(3)</a> <a href="#ref-for-dom-identityproviderconfig-configurl④">(4)</a>
+    <li><a href="#ref-for-dom-identityproviderconfig-configurl①">2.2.1. The CredentialRequestOptions ## {#browser-api-credential-request-options}</a>
+    <li><a href="#ref-for-dom-identityproviderconfig-configurl②">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-dom-identityproviderconfig-configurl③">(2)</a> <a href="#ref-for-dom-identityproviderconfig-configurl④">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-identityproviderconfig-clientid">
    <b><a href="#dom-identityproviderconfig-clientid">#dom-identityproviderconfig-clientid</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-identityproviderconfig-clientid">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dom-identityproviderconfig-clientid①">(2)</a> <a href="#ref-for-dom-identityproviderconfig-clientid②">(3)</a> <a href="#ref-for-dom-identityproviderconfig-clientid③">(4)</a>
+    <li><a href="#ref-for-dom-identityproviderconfig-clientid">2.2.1. The CredentialRequestOptions ## {#browser-api-credential-request-options}</a>
+    <li><a href="#ref-for-dom-identityproviderconfig-clientid①">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-dom-identityproviderconfig-clientid②">(2)</a> <a href="#ref-for-dom-identityproviderconfig-clientid③">(3)</a>
     <li><a href="#ref-for-dom-identityproviderconfig-clientid④">3.3. Accounts List</a>
     <li><a href="#ref-for-dom-identityproviderconfig-clientid⑤">3.5. Identity Assertions</a> <a href="#ref-for-dom-identityproviderconfig-clientid⑥">(2)</a>
    </ul>
@@ -4161,13 +4178,14 @@ that is being explored <a href="https://github.com/fedidcg/FedCM/issues/230#issu
   <aside class="dfn-panel" data-for="dom-identityproviderconfig-nonce">
    <b><a href="#dom-identityproviderconfig-nonce">#dom-identityproviderconfig-nonce</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-identityproviderconfig-nonce">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dom-identityproviderconfig-nonce①">(2)</a>
+    <li><a href="#ref-for-dom-identityproviderconfig-nonce">2.2.1. The CredentialRequestOptions ## {#browser-api-credential-request-options}</a>
+    <li><a href="#ref-for-dom-identityproviderconfig-nonce①">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="create-an-identitycredential">
    <b><a href="#create-an-identitycredential">#create-an-identitycredential</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-create-an-identitycredential">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-create-an-identitycredential">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
     <li><a href="#ref-for-create-an-identitycredential①">6.3.1. Manifest Fingerprinting</a>
    </ul>
   </aside>
@@ -4175,105 +4193,105 @@ that is being explored <a href="https://github.com/fedidcg/FedCM/issues/230#issu
    <b><a href="#parse-url">#parse-url</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-parse-url">2.1. The State Machine</a>
-    <li><a href="#ref-for-parse-url①">2.2. The IdentityCredential Interface</a> <a href="#ref-for-parse-url②">(2)</a> <a href="#ref-for-parse-url③">(3)</a> <a href="#ref-for-parse-url④">(4)</a>
+    <li><a href="#ref-for-parse-url①">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-parse-url②">(2)</a> <a href="#ref-for-parse-url③">(3)</a> <a href="#ref-for-parse-url④">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="fetch-request">
    <b><a href="#fetch-request">#fetch-request</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-fetch-request">2.2. The IdentityCredential Interface</a> <a href="#ref-for-fetch-request①">(2)</a> <a href="#ref-for-fetch-request②">(3)</a> <a href="#ref-for-fetch-request③">(4)</a> <a href="#ref-for-fetch-request④">(5)</a> <a href="#ref-for-fetch-request⑤">(6)</a>
+    <li><a href="#ref-for-fetch-request">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-fetch-request①">(2)</a> <a href="#ref-for-fetch-request②">(3)</a> <a href="#ref-for-fetch-request③">(4)</a> <a href="#ref-for-fetch-request④">(5)</a> <a href="#ref-for-fetch-request⑤">(6)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="fetch-the-config-file">
    <b><a href="#fetch-the-config-file">#fetch-the-config-file</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-fetch-the-config-file">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-fetch-the-config-file">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dictdef-identityproviderwellknown">
    <b><a href="#dictdef-identityproviderwellknown">#dictdef-identityproviderwellknown</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dictdef-identityproviderwellknown">2.2. The IdentityCredential Interface</a>
-    <li><a href="#ref-for-dictdef-identityproviderwellknown①">3.1. The Well-Known File</a>
+    <li><a href="#ref-for-dictdef-identityproviderwellknown">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
+    <li><a href="#ref-for-dictdef-identityproviderwellknown①">3.1. The Well-Known File</a> <a href="#ref-for-dictdef-identityproviderwellknown②">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dictdef-identityprovidericon">
    <b><a href="#dictdef-identityprovidericon">#dictdef-identityprovidericon</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dictdef-identityprovidericon">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-dictdef-identityprovidericon">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
     <li><a href="#ref-for-dictdef-identityprovidericon①">3.2. Manifest</a> <a href="#ref-for-dictdef-identityprovidericon②">(2)</a> <a href="#ref-for-dictdef-identityprovidericon③">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dictdef-identityproviderbranding">
    <b><a href="#dictdef-identityproviderbranding">#dictdef-identityproviderbranding</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dictdef-identityproviderbranding">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dictdef-identityproviderbranding①">(2)</a>
+    <li><a href="#ref-for-dictdef-identityproviderbranding">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-dictdef-identityproviderbranding①">(2)</a>
     <li><a href="#ref-for-dictdef-identityproviderbranding②">3.2. Manifest</a> <a href="#ref-for-dictdef-identityproviderbranding③">(2)</a> <a href="#ref-for-dictdef-identityproviderbranding④">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dictdef-identityproviderapiconfig">
    <b><a href="#dictdef-identityproviderapiconfig">#dictdef-identityproviderapiconfig</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dictdef-identityproviderapiconfig">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dictdef-identityproviderapiconfig①">(2)</a> <a href="#ref-for-dictdef-identityproviderapiconfig②">(3)</a> <a href="#ref-for-dictdef-identityproviderapiconfig③">(4)</a> <a href="#ref-for-dictdef-identityproviderapiconfig④">(5)</a> <a href="#ref-for-dictdef-identityproviderapiconfig⑤">(6)</a>
+    <li><a href="#ref-for-dictdef-identityproviderapiconfig">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-dictdef-identityproviderapiconfig①">(2)</a> <a href="#ref-for-dictdef-identityproviderapiconfig②">(3)</a> <a href="#ref-for-dictdef-identityproviderapiconfig③">(4)</a> <a href="#ref-for-dictdef-identityproviderapiconfig④">(5)</a> <a href="#ref-for-dictdef-identityproviderapiconfig⑤">(6)</a>
     <li><a href="#ref-for-dictdef-identityproviderapiconfig⑥">3.2. Manifest</a> <a href="#ref-for-dictdef-identityproviderapiconfig⑦">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="fetch-the-accounts-list">
    <b><a href="#fetch-the-accounts-list">#fetch-the-accounts-list</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-fetch-the-accounts-list">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-fetch-the-accounts-list">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dictdef-identityprovideraccount">
    <b><a href="#dictdef-identityprovideraccount">#dictdef-identityprovideraccount</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dictdef-identityprovideraccount">2.1. The State Machine</a>
-    <li><a href="#ref-for-dictdef-identityprovideraccount①">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dictdef-identityprovideraccount②">(2)</a> <a href="#ref-for-dictdef-identityprovideraccount③">(3)</a> <a href="#ref-for-dictdef-identityprovideraccount④">(4)</a> <a href="#ref-for-dictdef-identityprovideraccount⑤">(5)</a>
+    <li><a href="#ref-for-dictdef-identityprovideraccount①">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-dictdef-identityprovideraccount②">(2)</a> <a href="#ref-for-dictdef-identityprovideraccount③">(3)</a> <a href="#ref-for-dictdef-identityprovideraccount④">(4)</a> <a href="#ref-for-dictdef-identityprovideraccount⑤">(5)</a>
     <li><a href="#ref-for-dictdef-identityprovideraccount⑥">3.3. Accounts List</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dictdef-identityprovideraccountlist">
    <b><a href="#dictdef-identityprovideraccountlist">#dictdef-identityprovideraccountlist</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dictdef-identityprovideraccountlist">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dictdef-identityprovideraccountlist①">(2)</a>
+    <li><a href="#ref-for-dictdef-identityprovideraccountlist">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-dictdef-identityprovideraccountlist①">(2)</a>
     <li><a href="#ref-for-dictdef-identityprovideraccountlist②">3.3. Accounts List</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="fetch-the-account-picture">
    <b><a href="#fetch-the-account-picture">#fetch-the-account-picture</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-fetch-the-account-picture">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-fetch-the-account-picture">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="fetch-an-identity-assertion">
    <b><a href="#fetch-an-identity-assertion">#fetch-an-identity-assertion</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-fetch-an-identity-assertion">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-fetch-an-identity-assertion">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dictdef-identityprovidertoken">
    <b><a href="#dictdef-identityprovidertoken">#dictdef-identityprovidertoken</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dictdef-identityprovidertoken">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-dictdef-identityprovidertoken">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
     <li><a href="#ref-for-dictdef-identityprovidertoken①">3.5. Identity Assertions</a> <a href="#ref-for-dictdef-identityprovidertoken②">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="computing-the-manifest-url">
    <b><a href="#computing-the-manifest-url">#computing-the-manifest-url</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-computing-the-manifest-url">2.2. The IdentityCredential Interface</a> <a href="#ref-for-computing-the-manifest-url①">(2)</a> <a href="#ref-for-computing-the-manifest-url②">(3)</a>
+    <li><a href="#ref-for-computing-the-manifest-url">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-computing-the-manifest-url①">(2)</a> <a href="#ref-for-computing-the-manifest-url②">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="extract-the-json-fetch-response">
    <b><a href="#extract-the-json-fetch-response">#extract-the-json-fetch-response</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-extract-the-json-fetch-response">2.2. The IdentityCredential Interface</a> <a href="#ref-for-extract-the-json-fetch-response①">(2)</a> <a href="#ref-for-extract-the-json-fetch-response②">(3)</a> <a href="#ref-for-extract-the-json-fetch-response③">(4)</a> <a href="#ref-for-extract-the-json-fetch-response④">(5)</a>
+    <li><a href="#ref-for-extract-the-json-fetch-response">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-extract-the-json-fetch-response①">(2)</a> <a href="#ref-for-extract-the-json-fetch-response②">(3)</a> <a href="#ref-for-extract-the-json-fetch-response③">(4)</a> <a href="#ref-for-extract-the-json-fetch-response④">(5)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="request-permission-to-sign-up">
    <b><a href="#request-permission-to-sign-up">#request-permission-to-sign-up</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-request-permission-to-sign-up">2.2. The IdentityCredential Interface</a> <a href="#ref-for-request-permission-to-sign-up①">(2)</a>
+    <li><a href="#ref-for-request-permission-to-sign-up">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-request-permission-to-sign-up①">(2)</a>
     <li><a href="#ref-for-request-permission-to-sign-up②">3.3. Accounts List</a>
     <li><a href="#ref-for-request-permission-to-sign-up③">3.5. Identity Assertions</a>
    </ul>
@@ -4281,80 +4299,80 @@ that is being explored <a href="https://github.com/fedidcg/FedCM/issues/230#issu
   <aside class="dfn-panel" data-for="fetch-the-client-metadata">
    <b><a href="#fetch-the-client-metadata">#fetch-the-client-metadata</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-fetch-the-client-metadata">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-fetch-the-client-metadata">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dictdef-identityproviderclientmetadata">
    <b><a href="#dictdef-identityproviderclientmetadata">#dictdef-identityproviderclientmetadata</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dictdef-identityproviderclientmetadata">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dictdef-identityproviderclientmetadata①">(2)</a>
+    <li><a href="#ref-for-dictdef-identityproviderclientmetadata">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-dictdef-identityproviderclientmetadata①">(2)</a>
     <li><a href="#ref-for-dictdef-identityproviderclientmetadata②">3.4. Client Metadata</a> <a href="#ref-for-dictdef-identityproviderclientmetadata③">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="select-an-account">
    <b><a href="#select-an-account">#select-an-account</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-select-an-account">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-select-an-account">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-identityproviderwellknown-provider_urls">
    <b><a href="#dom-identityproviderwellknown-provider_urls">#dom-identityproviderwellknown-provider_urls</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-identityproviderwellknown-provider_urls">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dom-identityproviderwellknown-provider_urls①">(2)</a> <a href="#ref-for-dom-identityproviderwellknown-provider_urls②">(3)</a>
+    <li><a href="#ref-for-dom-identityproviderwellknown-provider_urls">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-dom-identityproviderwellknown-provider_urls①">(2)</a> <a href="#ref-for-dom-identityproviderwellknown-provider_urls②">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-identityproviderapiconfig-accounts_endpoint">
    <b><a href="#dom-identityproviderapiconfig-accounts_endpoint">#dom-identityproviderapiconfig-accounts_endpoint</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-identityproviderapiconfig-accounts_endpoint">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dom-identityproviderapiconfig-accounts_endpoint①">(2)</a>
+    <li><a href="#ref-for-dom-identityproviderapiconfig-accounts_endpoint">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-dom-identityproviderapiconfig-accounts_endpoint①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-identityproviderapiconfig-client_metadata_endpoint">
    <b><a href="#dom-identityproviderapiconfig-client_metadata_endpoint">#dom-identityproviderapiconfig-client_metadata_endpoint</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-identityproviderapiconfig-client_metadata_endpoint">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dom-identityproviderapiconfig-client_metadata_endpoint①">(2)</a>
+    <li><a href="#ref-for-dom-identityproviderapiconfig-client_metadata_endpoint">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-dom-identityproviderapiconfig-client_metadata_endpoint①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-identityproviderapiconfig-id_assertion_endpoint">
    <b><a href="#dom-identityproviderapiconfig-id_assertion_endpoint">#dom-identityproviderapiconfig-id_assertion_endpoint</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-identityproviderapiconfig-id_assertion_endpoint">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dom-identityproviderapiconfig-id_assertion_endpoint①">(2)</a>
+    <li><a href="#ref-for-dom-identityproviderapiconfig-id_assertion_endpoint">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-dom-identityproviderapiconfig-id_assertion_endpoint①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-identityproviderapiconfig-branding">
    <b><a href="#dom-identityproviderapiconfig-branding">#dom-identityproviderapiconfig-branding</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-identityproviderapiconfig-branding">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-dom-identityproviderapiconfig-branding">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-identityproviderbranding-background_color">
    <b><a href="#dom-identityproviderbranding-background_color">#dom-identityproviderbranding-background_color</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-identityproviderbranding-background_color">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-dom-identityproviderbranding-background_color">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-identityproviderbranding-color">
    <b><a href="#dom-identityproviderbranding-color">#dom-identityproviderbranding-color</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-identityproviderbranding-color">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-dom-identityproviderbranding-color">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-identityproviderbranding-icons">
    <b><a href="#dom-identityproviderbranding-icons">#dom-identityproviderbranding-icons</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-identityproviderbranding-icons">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-dom-identityproviderbranding-icons">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-identityprovidericon-url">
    <b><a href="#dom-identityprovidericon-url">#dom-identityprovidericon-url</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-identityprovidericon-url">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-dom-identityprovidericon-url">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-identityprovidericon-size">
    <b><a href="#dom-identityprovidericon-size">#dom-identityprovidericon-size</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-identityprovidericon-size">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-dom-identityprovidericon-size">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="color">
@@ -4367,62 +4385,64 @@ that is being explored <a href="https://github.com/fedidcg/FedCM/issues/230#issu
    <b><a href="#dom-identityprovideraccount-id">#dom-identityprovideraccount-id</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-identityprovideraccount-id">2.1. The State Machine</a>
-    <li><a href="#ref-for-dom-identityprovideraccount-id①">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dom-identityprovideraccount-id②">(2)</a>
+    <li><a href="#ref-for-dom-identityprovideraccount-id①">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-dom-identityprovideraccount-id②">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-identityprovideraccount-name">
    <b><a href="#dom-identityprovideraccount-name">#dom-identityprovideraccount-name</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-identityprovideraccount-name">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-dom-identityprovideraccount-name">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-identityprovideraccount-email">
    <b><a href="#dom-identityprovideraccount-email">#dom-identityprovideraccount-email</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-identityprovideraccount-email">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-dom-identityprovideraccount-email">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-identityprovideraccount-given_name">
    <b><a href="#dom-identityprovideraccount-given_name">#dom-identityprovideraccount-given_name</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-identityprovideraccount-given_name">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-dom-identityprovideraccount-given_name">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-identityprovideraccount-picture">
    <b><a href="#dom-identityprovideraccount-picture">#dom-identityprovideraccount-picture</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-identityprovideraccount-picture">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dom-identityprovideraccount-picture①">(2)</a> <a href="#ref-for-dom-identityprovideraccount-picture②">(3)</a>
+    <li><a href="#ref-for-dom-identityprovideraccount-picture">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-dom-identityprovideraccount-picture①">(2)</a> <a href="#ref-for-dom-identityprovideraccount-picture②">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-identityprovideraccount-approved_clients">
    <b><a href="#dom-identityprovideraccount-approved_clients">#dom-identityprovideraccount-approved_clients</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-identityprovideraccount-approved_clients">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dom-identityprovideraccount-approved_clients①">(2)</a> <a href="#ref-for-dom-identityprovideraccount-approved_clients②">(3)</a>
+    <li><a href="#ref-for-dom-identityprovideraccount-approved_clients">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-dom-identityprovideraccount-approved_clients①">(2)</a> <a href="#ref-for-dom-identityprovideraccount-approved_clients②">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-identityproviderclientmetadata-privacy_policy_url">
    <b><a href="#dom-identityproviderclientmetadata-privacy_policy_url">#dom-identityproviderclientmetadata-privacy_policy_url</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-identityproviderclientmetadata-privacy_policy_url">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dom-identityproviderclientmetadata-privacy_policy_url①">(2)</a> <a href="#ref-for-dom-identityproviderclientmetadata-privacy_policy_url②">(3)</a>
+    <li><a href="#ref-for-dom-identityproviderclientmetadata-privacy_policy_url">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-dom-identityproviderclientmetadata-privacy_policy_url①">(2)</a> <a href="#ref-for-dom-identityproviderclientmetadata-privacy_policy_url②">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-identityproviderclientmetadata-terms_of_service_url">
    <b><a href="#dom-identityproviderclientmetadata-terms_of_service_url">#dom-identityproviderclientmetadata-terms_of_service_url</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-identityproviderclientmetadata-terms_of_service_url">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dom-identityproviderclientmetadata-terms_of_service_url①">(2)</a> <a href="#ref-for-dom-identityproviderclientmetadata-terms_of_service_url②">(3)</a>
+    <li><a href="#ref-for-dom-identityproviderclientmetadata-terms_of_service_url">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a> <a href="#ref-for-dom-identityproviderclientmetadata-terms_of_service_url①">(2)</a> <a href="#ref-for-dom-identityproviderclientmetadata-terms_of_service_url②">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-id_assertion_endpoint_request-client_id">
    <b><a href="#dom-id_assertion_endpoint_request-client_id">#dom-id_assertion_endpoint_request-client_id</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-id_assertion_endpoint_request-client_id">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-dom-id_assertion_endpoint_request-client_id">2.2.1. The CredentialRequestOptions ## {#browser-api-credential-request-options}</a>
     <li><a href="#ref-for-dom-id_assertion_endpoint_request-client_id①">6.2. Network requests</a> <a href="#ref-for-dom-id_assertion_endpoint_request-client_id②">(2)</a> <a href="#ref-for-dom-id_assertion_endpoint_request-client_id③">(3)</a> <a href="#ref-for-dom-id_assertion_endpoint_request-client_id④">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-identityprovidertoken-token">
    <b><a href="#dom-identityprovidertoken-token">#dom-identityprovidertoken-token</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-identityprovidertoken-token">2.2. The IdentityCredential Interface</a> <a href="#ref-for-dom-identityprovidertoken-token①">(2)</a> <a href="#ref-for-dom-identityprovidertoken-token②">(3)</a>
+    <li><a href="#ref-for-dom-identityprovidertoken-token">2.2. The IdentityCredential Interface</a>
+    <li><a href="#ref-for-dom-identityprovidertoken-token①">2.2.1. The CredentialRequestOptions ## {#browser-api-credential-request-options}</a>
+    <li><a href="#ref-for-dom-identityprovidertoken-token②">2.2.2. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) internal method ## {#browser-api-rp-sign-in}</a>
     <li><a href="#ref-for-dom-identityprovidertoken-token③">3.5. Identity Assertions</a> <a href="#ref-for-dom-identityprovidertoken-token④">(2)</a>
    </ul>
   </aside>
